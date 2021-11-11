@@ -20,20 +20,22 @@ public class CommitController {
         this.commitCalcService = commitCalcService;
     }
 
-    @GetMapping("/{user}/{repo}/week")
-    public List<GHRepositoryStatistics.ContributorStats.Week> getUserWeekFrequency(@PathVariable String user, @PathVariable String repo) {
-        return commitCalcService.getWeekFrequency(repo, user);
+//    @GetMapping("/{user}/{repo}/week")
+//    public List<GHRepositoryStatistics.ContributorStats.Week> getUserWeekFrequency(@PathVariable String user, @PathVariable String repo) {
+//        return commitCalcService.getWeekFrequency(repo, user);
+//    }
+//    @GetMapping("/{org}/{repo}/{user}/total")
+//    public CommitFrequencyDTO getUserCommitDensity(@PathVariable String org, @PathVariable String repo,@PathVariable String user){
+//        return commitCalcService.getCommitDensityTotal(org,repo,user);
+//    }
+    @GetMapping("/{org}/{repo}/{user}/{startDate}/{endDate}")
+    public CommitFrequencyDTO getUserCommitDensityDay(@PathVariable String org, @PathVariable String repo,
+                                                      @PathVariable String user, @PathVariable String startDate,
+                                                      @PathVariable String endDate){
+        return commitCalcService.getCommitDensity(org,repo,user,startDate,endDate);
     }
-    @GetMapping("/{org}/{repo}/{user}/total")
-    public CommitFrequencyDTO getUserCommitDensity(@PathVariable String org, @PathVariable String repo,@PathVariable String user){
-        return commitCalcService.getCommitDensityTotal(org,repo,user);
-    }
-    @GetMapping("/{org}/{repo}/{user}/{date}/day")
-    public CommitFrequencyDTO getUserCommitDensityDay(@PathVariable String org, @PathVariable String repo, @PathVariable String user, @PathVariable String date){
-        return commitCalcService.getCommitDensityDay(org,repo,user,date);
-    }
-    @GetMapping("/{org}/{repo}/{user}/{date}/week")
-    public CommitFrequencyDTO getUserCommitDensityWeek(@PathVariable String org, @PathVariable String repo, @PathVariable String user, @PathVariable String date){
-        return commitCalcService.getCommitDensityWeek(org,repo,user,date);
-    }
+//    @GetMapping("/{org}/{repo}/{user}/{date}/week")
+//    public CommitFrequencyDTO getUserCommitDensityWeek(@PathVariable String org, @PathVariable String repo, @PathVariable String user, @PathVariable String date){
+//        return commitCalcService.getCommitDensityWeek(org,repo,user,date);
+//    }
 }

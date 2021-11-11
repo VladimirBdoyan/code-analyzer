@@ -1,45 +1,59 @@
 package com.company.statisticsservice.Service;
 
 
-import com.company.statisticsservice.dto.GitUserDto;
+import com.company.statisticsservice.dto.GitAccessResponseDto;
+import com.company.statisticsservice.dto.mapper.CommitDensityMapper;
+import com.company.statisticsservice.dto.mapper.GitRepositoryMapper;
 import com.company.statisticsservice.dto.mapper.GitUserDtoMapper;
+import com.company.statisticsservice.entity.CommitDensity;
+import com.company.statisticsservice.entity.GitRepository;
 import com.company.statisticsservice.entity.GitUser;
+import com.company.statisticsservice.repository.CommitDensityRepository;
+import com.company.statisticsservice.repository.GitHubRepository;
 import com.company.statisticsservice.repository.GitUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
-
-@Transactional
 public class GitUserServiceImpl implements GitUserService {
-    RestTemplate restTemplate = new RestTemplate();
 
     private final GitUserRepository gitUserRepository;
+    private final CommitDensityRepository commitDensityRepository;
+    private final GitHubRepository gitHubRepository;
 
     @Autowired
-    public GitUserServiceImpl(GitUserRepository gitUserRepository) {
+    public GitUserServiceImpl(GitUserRepository gitUserRepository, CommitDensityRepository commitDensityRepository, GitHubRepository gitHubRepository) {
         this.gitUserRepository = gitUserRepository;
+        this.commitDensityRepository = commitDensityRepository;
+        this.gitHubRepository = gitHubRepository;
     }
+
 
     @Override
-    public Optional<GitUserDto> create(GitUserDto dto) {
+    @Transactional
+    public Optional<GitAccessResponseDto> create(GitAccessResponseDto dto) {
 
+        //TODO fix code style Optional object don't get in save method
         Optional<GitUser> gitUser = GitUserDtoMapper.mapToEntity(dto);
+        CommitDensity commitDensity = CommitDensityMapper.mapToEntity(dto).get();
+        GitRepository repository = GitRepositoryMapper.mapToEntity(dto).get();
 
         gitUser = Optional.of(gitUserRepository.save(gitUser.get()));
+        repository.setGitUser(gitUser.get());
+        repository = gitHubRepository.save(repository);
+        commitDensity.setUserName(gitUser.get());
+        commitDensity.setRepoName(repository);
+        commitDensity = commitDensityRepository.save(commitDensity);
 
-        Optional<GitUserDto> dtoResponse;
-        dtoResponse = GitUserDtoMapper.mapToDto(gitUser.orElse(null));
-        dtoResponse.get().setRepoName(Objects.requireNonNull(gitUser.get().getRepositories()
-                .stream()
-                .filter(repo -> dto.getRepoName().equals(repo.getName()))
-                .findAny().orElse(null)).getName());
+        Optional<GitAccessResponseDto> dtoResponse;
+        dtoResponse = CommitDensityMapper.mapToDto(commitDensity);
 
-        return GitUserDtoMapper.mapToDto(gitUser.orElse(null));
+        GitUser user = gitUserRepository.getById(gitUser.get().getId());
+
+        return dtoResponse;
     }
+
 }
