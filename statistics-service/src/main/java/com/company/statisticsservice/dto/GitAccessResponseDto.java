@@ -3,7 +3,7 @@ package com.company.statisticsservice.dto;
 
 import java.util.Objects;
 
-public class GitUserDto {
+public class GitAccessResponseDto {
     private Long id;
 
     private String name;
@@ -11,6 +11,8 @@ public class GitUserDto {
     private String repoName;
     private Integer commitCount;
     private Integer repoCommitCount;
+    private Long since;
+    private Long till;
 
     public Long getId() {
         return id;
@@ -60,11 +62,27 @@ public class GitUserDto {
         this.repoCommitCount = repoCommitCount;
     }
 
+    public Long getSince() {
+        return since;
+    }
+
+    public void setSince(Long since) {
+        this.since = since;
+    }
+
+    public Long getTill() {
+        return till;
+    }
+
+    public void setTill(Long till) {
+        this.till = till;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GitUserDto that = (GitUserDto) o;
+        GitAccessResponseDto that = (GitAccessResponseDto) o;
         return id.equals(that.id);
     }
 

@@ -1,9 +1,10 @@
 package com.company.statisticsservice.Service;
 
-import com.company.statisticsservice.dto.GitUserDto;
+import com.company.statisticsservice.dto.GitAccessResponseDto;
 
 import java.util.Optional;
 
 public interface GitUserService {
-    Optional<GitUserDto> create(GitUserDto dto);
+    Optional<GitAccessResponseDto> create(GitAccessResponseDto dto);
+
 }

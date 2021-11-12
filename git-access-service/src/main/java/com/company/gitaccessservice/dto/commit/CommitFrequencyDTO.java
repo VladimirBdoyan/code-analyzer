@@ -3,18 +3,24 @@ package com.company.gitaccessservice.dto.commit;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CommitFrequencyDTO {
-    String userName;
-    String repoName;
-    Integer userCommitCount;
-    Integer repoCommitCount;
-    double userCommitDensity;
+    private String userName;
+    private String repoName;
+    private Integer userCommitCount;
+    private Integer repoCommitCount;
+    private double userCommitDensity;
+    private Long since;
+    private Long till;
 
-    public CommitFrequencyDTO(String userName, String repoName, Integer userCommitCount, Integer repoCommitCount, double userCommitDensity) {
+    public CommitFrequencyDTO(String userName, String repoName, Integer userCommitCount, Integer repoCommitCount,
+                              double userCommitDensity, Long since, Long till) {
         this.userName = userName;
         this.repoName = repoName;
         this.userCommitCount = userCommitCount;
         this.repoCommitCount = repoCommitCount;
         this.userCommitDensity = userCommitDensity;
+        this.since = since;
+        this.till = till;
+
     }
 
     public double getUserCommitDensity() {
@@ -59,5 +65,23 @@ public class CommitFrequencyDTO {
 
     public void setRepoCommitCount(Integer repoCommitCount) {
         this.repoCommitCount = repoCommitCount;
+    }
+
+    @JsonProperty("since")
+    public Long getSince() {
+        return since;
+    }
+
+    public void setSince(Long since) {
+        this.since = since;
+    }
+
+    @JsonProperty("till")
+    public Long getTill() {
+        return till;
+    }
+
+    public void setTill(Long till) {
+        this.till = till;
     }
 }

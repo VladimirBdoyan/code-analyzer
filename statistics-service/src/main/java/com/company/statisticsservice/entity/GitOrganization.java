@@ -19,11 +19,11 @@ public class GitOrganization {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "gitOrganization")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gitOrganization", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<GitUser> gitUsers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "organization", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<GitRepository> repositories;
 
