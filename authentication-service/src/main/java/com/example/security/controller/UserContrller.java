@@ -2,6 +2,7 @@ package com.example.security.controller;
 
 import com.example.security.config.JwtTokenProvider;
 import com.example.security.dto.UserRequest;
+import com.example.security.dto.UserResponse;
 import com.example.security.model.Authority;
 import com.example.security.model.User;
 import com.example.security.model.enums.AuthorityTypes;
@@ -29,8 +30,9 @@ public class UserContrller {
 
     @PostMapping("/login")
     public String login(@RequestBody UserRequest userRequest) {
-        Optional<User> user = userService.getByLoginAndPassword(userRequest.getUsername(), userRequest.getPassword());
+        Optional<UserResponse> user = userService.getByLoginAndPassword(userRequest.getUsername(), userRequest.getPassword());
         if (user.isPresent() && user.get().isEnabled()) {
+            user.get().setActive(true);
             return jwtTokenProvider.jwtTockenCreator(user.get());
         }
         return null;
@@ -50,7 +52,8 @@ public class UserContrller {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
             }
             user.setEnabled(false);
-            userService.create(user);
+            user.setActive(false);
+            userService.update(user);
             return ResponseEntity.of(Optional.of(user));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("user with " + user.getUsername() + " username alredy exist");
@@ -59,7 +62,7 @@ public class UserContrller {
     @PostMapping("/verify/{username}")
     public ResponseEntity verify(@PathVariable String username, @RequestBody String code) {
         if (codeService.isAccessed(username, code)) {
-            User user = userService.getByLogin(username).get();
+            UserResponse user = userService.getByLogin(username).get();
             user.setEnabled(true);
             userService.update(user);
             return ResponseEntity.status(HttpStatus.OK).body("User verification complite");
@@ -69,12 +72,21 @@ public class UserContrller {
 
     @DeleteMapping("/user/{username}")
     public ResponseEntity delete(@PathVariable String username) {
-        Optional<User> user = userService.getByLogin(username);
-        if (user.isPresent()) {
-            userService.delete(username);
+        if (userService.delete(username)){
             return ResponseEntity.status(HttpStatus.OK).body("Delete is complit");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found");
+    }
+
+    @GetMapping("logout")
+    public void logout(String username){
+        Optional<UserResponse> user=userService.getByLogin(username);
+        if (user.isPresent() && user.get().isActive() ){
+            user.get().setActive(false);
+            userService.update(user.get());
+        }
 
     }
+
+
 }

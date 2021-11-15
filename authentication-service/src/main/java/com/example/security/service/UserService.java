@@ -1,5 +1,8 @@
 package com.example.security.service;
 
+import com.example.security.dto.UserResponse;
+import com.example.security.dto.mapper.UserRequestMapper;
+import com.example.security.dto.mapper.UserResponseMapper;
 import com.example.security.model.Authority;
 import com.example.security.model.User;
 import com.example.security.repository.AuthorityRepository;
@@ -28,34 +31,44 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void delete(String username) {
+    public Optional<UserResponse> update(User user){
+        if (user==null){
+            return Optional.empty();
+        }
+        return UserResponseMapper.mapToUserResponse(userRepository.save(user));
+    }
+
+    public boolean delete(String username) {
 
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByUsername(username));
         if (optionalUser.isPresent()) {
             userRepository.delete(optionalUser.get());
-            for (Authority authority : optionalUser.get().getAuthorities()) {
-                authorityRepository.save(authority);
-            }
+            return true;
         }
+        return false;
     }
 
-    public User update(User user) {
-        return userRepository.save(user);
+    public Optional<UserResponse> update(UserResponse user) {
+        if (user==null){
+            return Optional.empty();
+        }
+        return UserResponseMapper.mapToUserResponse(userRepository.save(UserResponseMapper.mapToUserUserEntity(user).get()));
     }
 
     public Optional<User> get(String username) {
         return userRepository.findByUsernameEager(username);
     }
 
-    public Optional<User> getByLogin(String login) {
-        return userRepository.findByUsernameEager(login);
+    public Optional<UserResponse> getByLogin(String login) {
+
+        return UserResponseMapper.mapToUserResponse(userRepository.findByUsernameEager(login).get());
     }
 
-    public Optional<User> getByLoginAndPassword(String login, String password) {
-        Optional<User> user = getByLogin(login);
-        if (user.isPresent()) {
-            if (passwordEncoder.matches(password, user.get().getPassword())) {
-                return user;
+    public Optional<UserResponse> getByLoginAndPassword(String login, String password) {
+        User user = userRepository.findByUsername(login);
+        if (user!=null) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return UserResponseMapper.mapToUserResponse(user);
             }
         }
         return Optional.empty();

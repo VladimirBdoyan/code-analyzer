@@ -16,6 +16,9 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -76,6 +79,14 @@ public class User {
         this.enabled = enabled;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,5 +98,17 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(username);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", enabled=" + enabled +
+                ", isActive=" + isActive +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", authorities=" + authorities +
+                '}';
     }
 }

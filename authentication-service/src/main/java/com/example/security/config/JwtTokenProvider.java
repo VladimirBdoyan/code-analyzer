@@ -1,6 +1,7 @@
 package com.example.security.config;
 
 import com.auth0.jwt.JWT;
+import com.example.security.dto.UserResponse;
 import com.example.security.model.User;
 import com.example.security.model.enums.Role;
 import com.example.security.security.JWTProperties;
@@ -14,7 +15,7 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 @Component
 public class JwtTokenProvider {
 
-    public String jwtTockenCreator(User user){
+    public String jwtTockenCreator(UserResponse user){
         return   JWTProperties.TOKEN_PREFIX+
                  JWT.create()
                 .withClaim("roles", user.getAuthorities().toString())
