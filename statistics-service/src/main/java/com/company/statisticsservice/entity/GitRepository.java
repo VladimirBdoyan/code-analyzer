@@ -1,8 +1,6 @@
 package com.company.statisticsservice.entity;
 
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,7 +9,7 @@ import java.util.List;
 public class GitRepository {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "repository_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "repository_id_seq")
     @SequenceGenerator(name = "repository_id_seq", sequenceName = "repository_id_seq", allocationSize = 1)
     private Long id;
 
@@ -31,9 +29,15 @@ public class GitRepository {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "repoName", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommitDensity> commitDensities;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "gitRepository", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PullRequestReport> pullRequestsReports;
+
     public GitRepository() {
     }
 
+    public GitRepository(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

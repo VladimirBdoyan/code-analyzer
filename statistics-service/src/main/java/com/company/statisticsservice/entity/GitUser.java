@@ -1,7 +1,6 @@
 package com.company.statisticsservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,7 +30,7 @@ public class GitUser {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "gitUser", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<GitPullRequest> pullRequest;
+    private List<PullRequestReport> pullRequest;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "gitUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GitRepository> repositories;
@@ -40,6 +39,10 @@ public class GitUser {
     private List<CommitDensity> commitReport;
 
     public GitUser() {
+    }
+
+    public GitUser(String login) {
+        this.login = login;
     }
 
     public GitUser(Long id, String name, String login) {
@@ -80,11 +83,11 @@ public class GitUser {
         this.gitOrganization = gitOrganization;
     }
 
-    public List<GitPullRequest> getPullRequest() {
+    public List<PullRequestReport> getPullRequest() {
         return pullRequest;
     }
 
-    public void setPullRequest(List<GitPullRequest> pullRequest) {
+    public void setPullRequest(List<PullRequestReport> pullRequest) {
         this.pullRequest = pullRequest;
     }
 

@@ -2,10 +2,11 @@ package com.company.statisticsservice.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "commitfrequency")
+@Table(name = "commit_density_report")
 public class CommitDensity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commit_id_seq")
@@ -22,11 +23,17 @@ public class CommitDensity {
     @JoinColumn(name = "repo_id")
     private GitRepository repoName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_id")
+    private GitOrganization organization;
+
     private double density;
 
-    private Timestamp startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
-    private Timestamp endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
 
     public CommitDensity() {
     }
@@ -63,19 +70,27 @@ public class CommitDensity {
         this.density = density;
     }
 
-    public Timestamp getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public GitOrganization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(GitOrganization organization) {
+        this.organization = organization;
     }
 }

@@ -1,6 +1,6 @@
-package com.company.statisticsservice.dto.mapper;
+package com.company.statisticsservice.mapper;
 
-import com.company.statisticsservice.dto.GitAccessResponseDto;
+import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.entity.GitRepository;
 
 import java.util.ArrayList;

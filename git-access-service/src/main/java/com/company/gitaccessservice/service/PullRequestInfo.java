@@ -1,51 +1,51 @@
 package com.company.gitaccessservice.service;
 
-import org.kohsuke.github.GHCommit;
-import org.kohsuke.github.GHCommitQueryBuilder;
-import org.kohsuke.github.GHPullRequest;
-import org.kohsuke.github.GHPullRequestCommitDetail;
+import org.kohsuke.github.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PullRequestInfo {
 
-    private int prCommentCount;
+    GHCommitQueryBuilder queryBuilder;
 
-    // Getting Author Name from Repo PR , this is first commit Creator
-    public String getAuthorName(GHPullRequest pullRequest) {
-        String name = null;
+    public List<GHPullRequestCommitDetail> getCommits(GHPullRequest pullRequest ) {
+
+        // Find all Commits in Pull Request
         try {
-            List<GHPullRequestCommitDetail> commits = pullRequest.listCommits().toList();
-            name = commits.get(0).getCommit().getAuthor().getName();
-            return name;
+           return  pullRequest.listCommits().toList();
+//            queryBuilder = repository.queryCommits()
+//                    .from(pullRequest.getMergeCommitSha());
+//            return queryBuilder.list().toList();
+
+        } catch (IOException e) {
+            System.out.println("Can not get commits PullRequest : " + pullRequest.getTitle());
+            throw new RuntimeException(); // TODO change by own created exception;
+        }
+    }
+
+    // Find Issue Messages in Pull Request
+    public Integer getPullRequestConversationCount(GHPullRequest pullRequest){
+        try {
+            return  pullRequest.getComments().stream()
+                    .filter(ghIssueComment -> isIssueMessage(ghIssueComment.getBody()))
+                    .collect(Collectors.toList()).size();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return name;
-    }
-
-    public List<GHCommit> getCommitByAuthor(GHPullRequest pullRequest, String author) {
-        GHCommitQueryBuilder queryBuilder;
-        List<GHCommit> prCommitsByAuthor = new ArrayList<>();
-
-        // Find all Commits in Pull Request by PR Author
-        try {
-            queryBuilder = pullRequest.getRepository().queryCommits().from(pullRequest.getMergeCommitSha()).author(author);
-            prCommitsByAuthor = queryBuilder.list().toList();
-            prCommentCount = pullRequest.getCommentsCount();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return prCommitsByAuthor;
+        return null;
     }
 
 
-    public int getPRCommentCount() {
-        return prCommentCount;
+
+    public boolean isIssueMessage(String message) {
+
+        return message.contains("fix") || message.contains("bug")
+                || message.contains("error") || message.contains("problem");
     }
 
 }

@@ -88,21 +88,4 @@ public class RepositoryInfo extends GHRepository {
     }
 
     List<GHRepositoryStatistics.CommitActivity> commitActivities = new ArrayList<>();
-
-//    public List<GHRepositoryStatistics.CommitActivity> getCommitActivity(String url) {
-//        GHRepositoryStatistics repositoryStatistics = new GHRepositoryStatistics(setRepo(url));
-//
-//        try {
-//            repositoryStatistics.getCodeFrequency().size();
-//            for (GHRepositoryStatistics.CommitActivity commitActivity : repositoryStatistics.getCommitActivity()) {
-//                if (commitActivity.getTotal() > 0) {
-//                    commitActivities.add(commitActivity);
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return commitActivities;
-//    }
-
 }

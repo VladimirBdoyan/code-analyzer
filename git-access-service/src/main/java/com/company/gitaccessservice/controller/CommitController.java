@@ -1,41 +1,51 @@
 package com.company.gitaccessservice.controller;
 
-import com.company.gitaccessservice.dto.commit.CommitFrequencyDTO;
-import com.company.gitaccessservice.service.commit.CommitCalcServiceImpl;
-import org.kohsuke.github.GHRepositoryStatistics;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.company.gitaccessservice.dto.StatisticsResponseDto;
+import com.company.gitaccessservice.dto.commit.GitAccessCommitDetailsDto;
+import com.company.gitaccessservice.dto.commit.RequestDto;
+import com.company.gitaccessservice.dto.pullRequest.GitAccessPullRequestDetailsDto;
+import com.company.gitaccessservice.service.comment.CommentCalcServiceImpl;
+import com.company.gitaccessservice.service.commit.DensityServiceImpl;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/git-access")
+@RequestMapping("/api/v1/git-access/density")
 public class CommitController {
 
-    private final CommitCalcServiceImpl commitCalcService;
+    private final DensityServiceImpl commitCalcService;
+    private final CommentCalcServiceImpl commentCalcService;
 
-    public CommitController(CommitCalcServiceImpl commitCalcService) {
+    public CommitController(DensityServiceImpl commitCalcService, CommentCalcServiceImpl commentCalcService) {
         this.commitCalcService = commitCalcService;
+        this.commentCalcService = commentCalcService;
     }
 
-//    @GetMapping("/{user}/{repo}/week")
-//    public List<GHRepositoryStatistics.ContributorStats.Week> getUserWeekFrequency(@PathVariable String user, @PathVariable String repo) {
-//        return commitCalcService.getWeekFrequency(repo, user);
-//    }
-//    @GetMapping("/{org}/{repo}/{user}/total")
-//    public CommitFrequencyDTO getUserCommitDensity(@PathVariable String org, @PathVariable String repo,@PathVariable String user){
-//        return commitCalcService.getCommitDensityTotal(org,repo,user);
-//    }
-    @GetMapping("/{org}/{repo}/{user}/{startDate}/{endDate}")
-    public CommitFrequencyDTO getUserCommitDensityDay(@PathVariable String org, @PathVariable String repo,
-                                                      @PathVariable String user, @PathVariable String startDate,
-                                                      @PathVariable String endDate){
-        return commitCalcService.getCommitDensity(org,repo,user,startDate,endDate);
+    @PostMapping()
+    public StatisticsResponseDto getUserReport(@RequestBody RequestDto request) {
+
+        GitAccessCommitDetailsDto gitAccessCommitDetailsDto;
+        GitAccessPullRequestDetailsDto pullRequestsDetailsDTO;
+        StatisticsResponseDto statisticsResponseDto = new StatisticsResponseDto();
+
+        if(request.getRepoName() == null ){
+            gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByOrg(request);
+            pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByOrg(request);
+            statisticsResponseDto.setOrganization(request.getOrganization());
+        }else{
+            gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByRepo(request);
+            pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByRepo(request);
+            statisticsResponseDto.setRepoName(request.getRepoName());
+        }
+        statisticsResponseDto.setOrganization(request.getOrganization());
+        statisticsResponseDto.setLogin(gitAccessCommitDetailsDto.getLogin());
+        statisticsResponseDto.setUserName(gitAccessCommitDetailsDto.getUserName());
+
+        statisticsResponseDto.setSince(request.getStartDate().getTime());
+        statisticsResponseDto.setTill(request.getEndDate().getTime());
+        statisticsResponseDto.setGitUserPullRequestsDetailsDTO(pullRequestsDetailsDTO);
+        statisticsResponseDto.setCommitFrequencyDTO(gitAccessCommitDetailsDto);
+
+        return statisticsResponseDto;
     }
-//    @GetMapping("/{org}/{repo}/{user}/{date}/week")
-//    public CommitFrequencyDTO getUserCommitDensityWeek(@PathVariable String org, @PathVariable String repo, @PathVariable String user, @PathVariable String date){
-//        return commitCalcService.getCommitDensityWeek(org,repo,user,date);
-//    }
 }

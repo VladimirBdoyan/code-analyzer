@@ -1,15 +1,14 @@
-package com.company.statisticsservice.dto;
-
+package com.company.statisticsservice.dto.gitAccessResponse;
 
 import java.util.Objects;
 
-public class GitAccessResponseDto {
+public class GitAccessCommitDetailsDto {
     private Long id;
 
-    private String name;
+    private String userName;
     private String login;
     private String repoName;
-    private Integer commitCount;
+    private Integer userCommitCount;
     private Integer repoCommitCount;
     private Long since;
     private Long till;
@@ -23,11 +22,11 @@ public class GitAccessResponseDto {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 
     public String getLogin() {
@@ -47,11 +46,11 @@ public class GitAccessResponseDto {
     }
 
     public Integer getCommitCount() {
-        return commitCount;
+        return userCommitCount;
     }
 
-    public void setCommitCount(Integer commitCount) {
-        this.commitCount = commitCount;
+    public void setCommitCount(Integer userCommitCount) {
+        this.userCommitCount = userCommitCount;
     }
 
     public Integer getRepoCommitCount() {
@@ -82,7 +81,7 @@ public class GitAccessResponseDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GitAccessResponseDto that = (GitAccessResponseDto) o;
+        GitAccessCommitDetailsDto that = (GitAccessCommitDetailsDto) o;
         return id.equals(that.id);
     }
 
@@ -95,7 +94,7 @@ public class GitAccessResponseDto {
     public String toString() {
         return "GitUserDto{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + userName + '\'' +
                 ", login='" + login + '\'' +
                 '}';
     }
