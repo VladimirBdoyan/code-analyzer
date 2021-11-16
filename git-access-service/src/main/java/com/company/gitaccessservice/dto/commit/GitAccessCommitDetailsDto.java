@@ -2,26 +2,33 @@ package com.company.gitaccessservice.dto.commit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CommitFrequencyDTO {
+public class GitAccessCommitDetailsDto {
     private String userName;
+    private String login;
     private String repoName;
     private Integer userCommitCount;
     private Integer repoCommitCount;
     private double userCommitDensity;
-    private Long since;
-    private Long till;
 
-    public CommitFrequencyDTO(String userName, String repoName, Integer userCommitCount, Integer repoCommitCount,
-                              double userCommitDensity, Long since, Long till) {
+
+    public GitAccessCommitDetailsDto(String userName, String login, String repoName, Integer userCommitCount, Integer repoCommitCount,
+                                     double userCommitDensity) {
         this.userName = userName;
+        this.login = login;
         this.repoName = repoName;
         this.userCommitCount = userCommitCount;
         this.repoCommitCount = repoCommitCount;
         this.userCommitDensity = userCommitDensity;
-        this.since = since;
-        this.till = till;
-
     }
+    public GitAccessCommitDetailsDto(String userName, String login, Integer userCommitCount, Integer repoCommitCount,
+                                     double userCommitDensity) {
+        this.userName = userName;
+        this.login = login;
+        this.userCommitCount = userCommitCount;
+        this.repoCommitCount = repoCommitCount;
+        this.userCommitDensity = userCommitDensity;
+    }
+
 
     public double getUserCommitDensity() {
         return userCommitDensity;
@@ -67,21 +74,12 @@ public class CommitFrequencyDTO {
         this.repoCommitCount = repoCommitCount;
     }
 
-    @JsonProperty("since")
-    public Long getSince() {
-        return since;
+    @JsonProperty("login")
+    public String getLogin() {
+        return login;
     }
 
-    public void setSince(Long since) {
-        this.since = since;
-    }
-
-    @JsonProperty("till")
-    public Long getTill() {
-        return till;
-    }
-
-    public void setTill(Long till) {
-        this.till = till;
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

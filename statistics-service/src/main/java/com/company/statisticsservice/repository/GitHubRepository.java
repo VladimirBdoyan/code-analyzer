@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GitHubRepository extends JpaRepository<GitRepository,Long>, JpaSpecificationExecutor<GitRepository> {
+public interface GitHubRepository extends JpaRepository<GitRepository, Long>, JpaSpecificationExecutor<GitRepository> {
+
+    GitRepository findFirstByName(String name);
+
 }

@@ -1,6 +1,6 @@
-package com.company.statisticsservice.dto.mapper;
+package com.company.statisticsservice.mapper;
 
-import com.company.statisticsservice.dto.GitAccessResponseDto;
+import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.entity.GitUser;
 import com.company.statisticsservice.repository.GitUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class GitUserDtoMapper {
         }
         GitAccessResponseDto dto = new GitAccessResponseDto();
         dto.setId(entity.getId());
-        dto.setName(entity.getName());
+        dto.setUserName(entity.getName());
         dto.setLogin(entity.getLogin());
         return Optional.of(dto);
     }
@@ -27,16 +27,10 @@ public class GitUserDtoMapper {
         if (dto == null) {
             return Optional.empty();
         }
-//        List<GitRepository> repos = new ArrayList<>();
-//        repos.add(GitRepositoryMapper.mapToEntity(dto).get());
-//        List<CommitDensity> commitReport = new ArrayList<>();
-//        commitReport.add(CommitDensityMapper.mapToEntity(dto).get());
         GitUser entity = new GitUser();
         entity.setId(dto.getId());
-        entity.setName(dto.getName());
+        entity.setName(dto.getUserName());
         entity.setLogin(dto.getLogin());
-//        entity.setRepositories(repos);
-//        entity.setCommitReport(commitReport);
 
         return Optional.of(entity);
     }

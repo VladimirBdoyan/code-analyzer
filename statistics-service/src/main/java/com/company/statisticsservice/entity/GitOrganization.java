@@ -27,12 +27,17 @@ public class GitOrganization {
     @JsonIgnore
     private List<GitRepository> repositories;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommitDensity> commitDensities;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PullRequestReport> pullRequestsReports;
+
     public GitOrganization() {
 
     }
 
-    public GitOrganization(Long id, String name) {
-        this.id = id;
+    public GitOrganization(String name) {
         this.name = name;
     }
 
