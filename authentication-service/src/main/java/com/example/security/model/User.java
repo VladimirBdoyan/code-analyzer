@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "authentication")
 public class User {
     @Id
     private String username;

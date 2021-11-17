@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "authority")
+@Table(name = "authority", schema = "authentication")
 public class Authority implements Serializable {
 
     @EmbeddedId
