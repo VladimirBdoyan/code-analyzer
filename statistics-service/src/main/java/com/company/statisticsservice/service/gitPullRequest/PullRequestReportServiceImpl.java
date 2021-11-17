@@ -1,4 +1,4 @@
-package com.company.statisticsservice.Service.gitPullRequest;
+package com.company.statisticsservice.service.gitPullRequest;
 
 import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.entity.GitOrganization;
@@ -7,12 +7,17 @@ import com.company.statisticsservice.entity.GitUser;
 import com.company.statisticsservice.entity.PullRequestReport;
 import com.company.statisticsservice.mapper.*;
 import com.company.statisticsservice.repository.PullRequestRepository;
+import com.company.statisticsservice.service.gitOrganizationService.OrganizationServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 @Service
 public class PullRequestReportServiceImpl implements PullRequestReportService {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(PullRequestReportServiceImpl.class);
 
     private final PullRequestRepository pullRequestRepository;
 
@@ -38,6 +43,7 @@ public class PullRequestReportServiceImpl implements PullRequestReportService {
                                           GitUser gitUser,
                                           GitRepository repo,
                                           GitAccessResponseDto dto) {
+        LOGGER.info("Started creating PullRequest Report");
 
         PullRequestReport pullRequestsReport = PullRequestReportMapper.mapToEntity(dto);
         pullRequestsReport.setGitUser(gitUser);
@@ -45,6 +51,8 @@ public class PullRequestReportServiceImpl implements PullRequestReportService {
         if(repo != null){
             pullRequestsReport.setGitRepository(repo);
         }
-        return pullRequestRepository.save(pullRequestsReport);
+        pullRequestsReport = pullRequestRepository.save(pullRequestsReport);
+        LOGGER.info("Finished creating PullRequest Report");
+        return pullRequestsReport;
     }
 }

@@ -1,4 +1,4 @@
-package com.company.statisticsservice.Service.gitUser;
+package com.company.statisticsservice.service.gitUser;
 
 
 import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
@@ -6,11 +6,16 @@ import com.company.statisticsservice.entity.GitOrganization;
 import com.company.statisticsservice.mapper.*;
 import com.company.statisticsservice.entity.GitUser;
 import com.company.statisticsservice.repository.GitUserRepository;
+import com.company.statisticsservice.service.gitRepository.GitRepositoryServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GitUserServiceImpl implements GitUserService {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(GitUserServiceImpl.class);
 
     private final GitUserRepository gitUserRepository;
 
@@ -45,9 +50,11 @@ public class GitUserServiceImpl implements GitUserService {
     @Override
     @Transactional
     public GitUser createUser(GitAccessResponseDto dto, GitOrganization organization) {
+        LOGGER.info("Started creating GitUser ");
         GitUser gitUser = GitUserDtoMapper.mapToEntity(dto).get();
         gitUser.setGitOrganization(organization);
         gitUser = gitUserRepository.save(gitUser);
+        LOGGER.info("Finished creating GitUser {}", gitUser);
         return gitUser;
     }
 

@@ -1,4 +1,4 @@
-package com.company.statisticsservice.Service.gitPullRequest;
+package com.company.statisticsservice.service.gitPullRequest;
 
 import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.entity.GitOrganization;

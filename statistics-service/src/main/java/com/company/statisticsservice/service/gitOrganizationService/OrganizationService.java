@@ -1,4 +1,4 @@
-package com.company.statisticsservice.Service.gitOrganizationService;
+package com.company.statisticsservice.service.gitOrganizationService;
 
 import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.entity.GitOrganization;
