@@ -1,11 +1,11 @@
 package com.company.statisticsservice.controler;
 
 
-import com.company.statisticsservice.Service.CommitDensityServiceImpl;
-import com.company.statisticsservice.Service.gitOrganizationService.OrganizationServiceImpl;
-import com.company.statisticsservice.Service.gitPullRequest.PullRequestReportServiceImpl;
-import com.company.statisticsservice.Service.gitRepository.GitRepositoryServiceImpl;
-import com.company.statisticsservice.Service.gitUser.GitUserServiceImpl;
+import com.company.statisticsservice.service.commitDensityService.CommitDensityServiceImpl;
+import com.company.statisticsservice.service.gitOrganizationService.OrganizationServiceImpl;
+import com.company.statisticsservice.service.gitPullRequest.PullRequestReportServiceImpl;
+import com.company.statisticsservice.service.gitRepository.GitRepositoryServiceImpl;
+import com.company.statisticsservice.service.gitUser.GitUserServiceImpl;
 import com.company.statisticsservice.dto.RequestDto;
 import com.company.statisticsservice.dto.gitAccessResponse.GitAccessResponseDto;
 import com.company.statisticsservice.mapper.*;
