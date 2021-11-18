@@ -1,4 +1,4 @@
-package com.example.findbugs.entity;
+package com.example.codeanalyzerservice.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "analyze_result",schema = "check_code")
+@Table(name = "analyze_result")
 public class AnalyzeResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

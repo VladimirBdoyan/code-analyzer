@@ -1,4 +1,4 @@
-package com.example.findbugs.entity.enums;
+package com.example.codeanalyzerservice.entity.enums;
 
 public enum CodeSmellCategory {
     LOW(2), MEDIUM(4), HIGH(6);

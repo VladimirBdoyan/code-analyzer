@@ -1,4 +1,4 @@
-package com.example.findbugs.exception;
+package com.example.codeanalyzerservice.exception;
 
 public class ResourceNotFoundException extends AppRuntimeException {
 

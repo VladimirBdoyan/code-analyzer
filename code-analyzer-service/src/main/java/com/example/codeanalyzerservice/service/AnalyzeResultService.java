@@ -1,9 +1,9 @@
-package com.example.findbugs.service;
+package com.example.codeanalyzerservice.service;
 
-import com.example.findbugs.dto.AnalyzeResultDTO;
-import com.example.findbugs.dto.mapper.AnalyzeResultMapper;
-import com.example.findbugs.entity.AnalyzeResult;
-import com.example.findbugs.repository.AnalyzeResultRepository;
+import com.example.codeanalyzerservice.dto.AnalyzeResultDTO;
+import com.example.codeanalyzerservice.dto.mapper.AnalyzeResultMapper;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.repository.AnalyzeResultRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

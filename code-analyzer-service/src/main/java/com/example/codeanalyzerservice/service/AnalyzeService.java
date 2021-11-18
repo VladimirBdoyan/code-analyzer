@@ -1,10 +1,13 @@
-package com.example.findbugs.service;
+package com.example.codeanalyzerservice.service;
 
-import com.example.findbugs.analyzer.Visitor;
-import com.example.findbugs.dto.AnalyzeRequestDTO;
-import com.example.findbugs.entity.AnalyzeReport;
-import com.example.findbugs.entity.AnalyzeResult;
-import com.example.findbugs.exception.RepositoriesNotFoundException;
+import com.example.codeanalyzerservice.analyzer.Visitor;
+import com.example.codeanalyzerservice.dto.AnalyzeReportDTO;
+import com.example.codeanalyzerservice.dto.AnalyzeRequestDTO;
+import com.example.codeanalyzerservice.dto.GitAccessResponseDTO;
+import com.example.codeanalyzerservice.dto.mapper.AnalyzeReportMapper;
+import com.example.codeanalyzerservice.entity.AnalyzeReport;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.exception.RepositoriesNotFoundException;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
@@ -32,22 +35,24 @@ public class AnalyzeService {
     private final Visitor visitor;
 
     @Transactional
-    public AnalyzeReport analyze(AnalyzeRequestDTO analyzeRequest) {
+    public AnalyzeReportDTO analyze(AnalyzeRequestDTO analyzeRequest) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<List<URL>> response = restTemplate.exchange("url", HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<URL>>() {
-                }, analyzeRequest);
+//        ResponseEntity<List<URL>> response = restTemplate.exchange("http://localhost:8080/api/v1/git-access/URL", HttpMethod.POST, null,
+//                new ParameterizedTypeReference<List<URL>>() {
+//                }, analyzeRequest);
+        GitAccessResponseDTO response = restTemplate.postForObject("http://localhost:8080/api/v1/git-access/URL",analyzeRequest,GitAccessResponseDTO.class);
 
-        if (response.getStatusCode().is4xxClientError()) {
-            throw new RepositoriesNotFoundException(
-                    "Repositories for user: " + analyzeRequest.getUsername() + " not found");
-        }
 
-        List<URL> urls = response.getBody();
+//        if (response.getStatusCode().is4xxClientError()) {
+//            throw new RepositoriesNotFoundException(
+//                    "Repositories for user: " + analyzeRequest.getLogin() + " not found");
+//        }
+
+        List<URL> urls = response.getUrls();
 
         if (urls == null) {
             throw new RepositoriesNotFoundException(
-                    "Repositories for user: " + analyzeRequest.getUsername() + " not found");
+                    "Repositories for user: " + analyzeRequest.getLogin() + " not found");
         }
 
 
@@ -59,7 +64,7 @@ public class AnalyzeService {
                 ReflectionTypeSolver reflectionTypeSolver = new ReflectionTypeSolver();
                 JavaSymbolSolver javaSymbolSolver = new JavaSymbolSolver(reflectionTypeSolver);
                 javaParser.getParserConfiguration().setSymbolResolver(javaSymbolSolver);
-                CompilationUnit compilationUnit = javaParser.parse(url.openStream()).getResult().orElseThrow();
+                CompilationUnit compilationUnit = javaParser.parse(url.openStream()).getResult().orElseThrow(RuntimeException::new);
                 visitor.visit(compilationUnit, analyzeResult);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -69,10 +74,13 @@ public class AnalyzeService {
         AnalyzeReport analyzeReport = new AnalyzeReport();
         analyzeReport.setAnalyzeResult(analyzeResult);
         analyzeReport.setDate(new Date());
-        analyzeReport.setUsername(analyzeRequest.getUsername());
-        analyzeReport.setSince(analyzeRequest.getSince());
-        analyzeReport.setTill(analyzeRequest.getSince());
-        return analyzeReportService.save(analyzeReport);
+        analyzeReport.setUsername(analyzeRequest.getLogin());
+        analyzeReport.setSince(analyzeRequest.getStartDate());
+        analyzeReport.setTill(analyzeRequest.getEndDate());
+        analyzeReport = analyzeReportService.save(analyzeReport);
+        AnalyzeReportDTO  reportDTO = new AnalyzeReportDTO();
+        reportDTO = AnalyzeReportMapper.mapToDTO(analyzeReport);
+        return reportDTO;
 
     }
 }

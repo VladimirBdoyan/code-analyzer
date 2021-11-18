@@ -1,7 +1,8 @@
-package com.example.findbugs.dto;
+package com.example.codeanalyzerservice.dto;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 
@@ -10,5 +11,7 @@ public class AnalyzeReportDTO {
     private Long id;
     private String username;
     private Date date;
+    private Date since;
+    private Date till;
     private AnalyzeResultDTO analyzeResults;
 }

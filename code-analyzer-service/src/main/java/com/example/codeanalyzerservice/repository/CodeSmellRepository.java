@@ -1,6 +1,6 @@
-package com.example.findbugs.repository;
+package com.example.codeanalyzerservice.repository;
 
-import com.example.findbugs.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.CodeSmell;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

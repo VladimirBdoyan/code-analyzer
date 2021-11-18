@@ -1,8 +1,8 @@
-package com.example.findbugs.service;
+package com.example.codeanalyzerservice.service;
 
-import com.example.findbugs.entity.CodeSmell;
-import com.example.findbugs.exception.ResourceNotFoundException;
-import com.example.findbugs.repository.CodeSmellRepository;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.exception.ResourceNotFoundException;
+import com.example.codeanalyzerservice.repository.CodeSmellRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,8 +23,8 @@ public class CodeSmellService {
     CodeSmell getById(Long id) {
         return bugEntityRepository
                 .findById(id)
-                .orElseThrow(() -> {
-                    throw new ResourceNotFoundException("BugEntity with id " + id + " not found");
-                });
+                .orElseThrow(() ->
+                     new ResourceNotFoundException("BugEntity with id " + id + " not found")
+                );
     }
 }

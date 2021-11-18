@@ -1,6 +1,6 @@
-package com.example.findbugs.dto;
+package com.example.codeanalyzerservice.dto;
 
-import com.example.findbugs.entity.enums.CodeSmellCategory;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import lombok.Data;
 
 @Data

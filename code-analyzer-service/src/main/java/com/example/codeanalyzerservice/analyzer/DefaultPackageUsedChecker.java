@@ -1,8 +1,8 @@
-package com.example.findbugs.analyzer;
+package com.example.codeanalyzerservice.analyzer;
 
-import com.example.findbugs.entity.AnalyzeResult;
-import com.example.findbugs.entity.CodeSmell;
-import com.example.findbugs.entity.enums.CodeSmellCategory;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +19,7 @@ public class DefaultPackageUsedChecker implements Checker {
         arg.setCurrentRate(arg.getCurrentRate()+coefficient);
         arg.setMaxRate(arg.getMaxRate()+coefficient);
 
-        if (n.getPackageDeclaration().isEmpty()) {
+        if (!n.getPackageDeclaration().isPresent()) {
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.LOW);
             codeSmell.setMessage("Default package should not be used");

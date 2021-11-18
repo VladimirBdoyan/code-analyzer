@@ -1,4 +1,4 @@
-package com.example.findbugs.entity;
+package com.example.codeanalyzerservice.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class AnalyzeReport {
     @Column(name = "till")
     private Date till;
 
-    @OneToOne(mappedBy = "analyzeReport")
+    @OneToOne(mappedBy = "analyzeReport", cascade = CascadeType.ALL)
     private AnalyzeResult analyzeResult;
 
     @Override

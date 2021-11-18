@@ -1,4 +1,4 @@
-package com.example.findbugs.analyzer;
+package com.example.codeanalyzerservice.analyzer;
 
 public interface Checker {
     void check();

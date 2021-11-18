@@ -1,8 +1,8 @@
-package com.example.findbugs.service;
+package com.example.codeanalyzerservice.service;
 
-import com.example.findbugs.entity.AnalyzeReport;
-import com.example.findbugs.exception.ResourceNotFoundException;
-import com.example.findbugs.repository.AnalyzeReportRepository;
+import com.example.codeanalyzerservice.entity.AnalyzeReport;
+import com.example.codeanalyzerservice.exception.ResourceNotFoundException;
+import com.example.codeanalyzerservice.repository.AnalyzeReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,8 +22,8 @@ public class AnalyzeReportService {
     AnalyzeReport getById(Long id) {
         return analyzeReportRepository
                 .findById(id)
-                .orElseThrow(() -> {
-                    throw new ResourceNotFoundException("AnalyzeReport with id " + id + " not found");
-                });
+                .orElseThrow(() ->
+                     new ResourceNotFoundException("AnalyzeReport with id " + id + " not found")
+                );
     }
 }

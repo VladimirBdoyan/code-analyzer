@@ -1,8 +1,8 @@
-package com.example.findbugs.analyzer;
+package com.example.codeanalyzerservice.analyzer;
 
-import com.example.findbugs.entity.AnalyzeResult;
-import com.example.findbugs.entity.CodeSmell;
-import com.example.findbugs.entity.enums.CodeSmellCategory;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
@@ -21,7 +21,7 @@ public class ResourceClosedChecker implements Checker {
 
     @Override
     public void check() {
-        if (n.getBody().isEmpty()) {
+        if (!n.getBody().isPresent()) {
             return;
         }
 

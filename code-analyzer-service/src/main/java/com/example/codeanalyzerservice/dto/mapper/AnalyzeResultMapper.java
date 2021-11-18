@@ -1,7 +1,7 @@
-package com.example.findbugs.dto.mapper;
+package com.example.codeanalyzerservice.dto.mapper;
 
-import com.example.findbugs.dto.AnalyzeResultDTO;
-import com.example.findbugs.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.dto.AnalyzeResultDTO;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
 
 public final class AnalyzeResultMapper {
     private AnalyzeResultMapper(){}

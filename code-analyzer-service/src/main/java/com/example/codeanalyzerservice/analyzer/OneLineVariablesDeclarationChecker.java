@@ -1,8 +1,8 @@
-package com.example.findbugs.analyzer;
+package com.example.codeanalyzerservice.analyzer;
 
-import com.example.findbugs.entity.AnalyzeResult;
-import com.example.findbugs.entity.CodeSmell;
-import com.example.findbugs.entity.enums.CodeSmellCategory;
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;

@@ -1,7 +1,7 @@
-package com.example.findbugs.dto.mapper;
+package com.example.codeanalyzerservice.dto.mapper;
 
-import com.example.findbugs.dto.CodeSmellDTO;
-import com.example.findbugs.entity.CodeSmell;
+import com.example.codeanalyzerservice.dto.CodeSmellDTO;
+import com.example.codeanalyzerservice.entity.CodeSmell;
 
 import java.util.ArrayList;
 import java.util.List;

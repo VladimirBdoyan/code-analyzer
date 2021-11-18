@@ -1,6 +1,6 @@
-package com.example.findbugs.entity;
+package com.example.codeanalyzerservice.entity;
 
-import com.example.findbugs.entity.enums.CodeSmellCategory;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

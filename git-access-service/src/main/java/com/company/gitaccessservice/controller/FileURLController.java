@@ -1,11 +1,9 @@
 package com.company.gitaccessservice.controller;
 
+import com.company.gitaccessservice.dto.URLResponseDTO;
 import com.company.gitaccessservice.dto.commit.RequestDto;
 import com.company.gitaccessservice.service.FileURLServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import java.util.List;
@@ -20,8 +18,8 @@ public class FileURLController {
         this.fileURLService = fileURLService;
     }
 
-    @GetMapping()
-    public List<URL> getDeveloperCommitURL(@RequestBody RequestDto urlDto) {
+    @PostMapping()
+    public URLResponseDTO getDeveloperCommitURL(@RequestBody RequestDto urlDto) {
         String repo = null;
         String org = null;
         try {
@@ -31,16 +29,21 @@ public class FileURLController {
             repo = null;
             org = null;
         }
+        URLResponseDTO responseDTO = new URLResponseDTO();
 
 
         if (repo == null && org == null) {
-            return fileURLService.getFileURLbyUser(urlDto);
+            responseDTO.setUrls(fileURLService.getFileURLbyUser(urlDto));
+            return responseDTO;
         } else if (repo != null && org == null) {
-            return fileURLService.getFileURLbyUserRepo(urlDto);
+            responseDTO.setUrls(fileURLService.getFileURLbyUserRepo(urlDto));
+            return responseDTO;
         } else if (repo == null && org != null) {
-            return fileURLService.getFileURLbyOrg(urlDto);
+            responseDTO.setUrls(fileURLService.getFileURLbyOrg(urlDto));
+            return responseDTO;
         } else {
-            return fileURLService.getFileURLbyOrgRepo(urlDto);
+            responseDTO.setUrls(fileURLService.getFileURLbyOrgRepo(urlDto));
+            return responseDTO ;
         }
     }
 }

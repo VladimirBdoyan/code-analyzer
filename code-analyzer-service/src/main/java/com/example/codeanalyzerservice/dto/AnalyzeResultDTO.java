@@ -1,4 +1,4 @@
-package com.example.findbugs.dto;
+package com.example.codeanalyzerservice.dto;
 
 import lombok.Data;
 
