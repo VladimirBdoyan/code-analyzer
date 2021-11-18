@@ -27,22 +27,18 @@ public class CommitServiceImpl {
         //by user whole
         if(request.getRepoName() == null && request.getOrganization() == null ){
             gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByUser(request);
-            //TODO change by User whole repos creating report
             pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByUser(request);
             //by user repo
         }else if (request.getRepoName() != null && request.getOrganization() == null){
             gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByUserRepo(request);
-            //TODO change by User repo creating report
             pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByUserRepo(request);
             //by Org whole
         }else if(request.getRepoName() == null && request.getOrganization() != null ){
             gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByOrg(request);
-            //TODO change by User repo creating report
             pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByOrg(request);
             //by Org repo
         }else{
             gitAccessCommitDetailsDto = commitCalcService.getCommitDensityByOrgRepo(request);
-            //TODO change by User repo creating report
             pullRequestsDetailsDTO = commentCalcService.creatGitUserPullRequestDetailsByOrgRepo(request);
         }
         reportDto.setOrganization(request.getOrganization());

@@ -1,9 +1,7 @@
 package com.company.gitaccessservice.controller;
 
 import com.company.gitaccessservice.dto.StatisticsResponseDto;
-import com.company.gitaccessservice.dto.commit.GitAccessCommitDetailsDto;
 import com.company.gitaccessservice.dto.commit.RequestDto;
-import com.company.gitaccessservice.dto.pullRequest.GitAccessPullRequestDetailsDto;
 import com.company.gitaccessservice.service.commit.CommitServiceImpl;
 import org.springframework.web.bind.annotation.*;
 

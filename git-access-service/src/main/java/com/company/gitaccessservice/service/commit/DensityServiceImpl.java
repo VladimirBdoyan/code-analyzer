@@ -88,8 +88,6 @@ public class DensityServiceImpl implements DensityService {
         long startDate = request.getStartDate().getTime();
         long endDate = request.getEndDate().getTime() + TimeStaps.TIMSTEPOFDAY;
         String login = request.getlogin();
-
-
         Map<String, GHRepository> userRepos = GitUser.setGitUser(login).setRepos();
         for (GHRepository repo : userRepos.values()) {
             repoCommitCount += GetCommit.getRepoCommitCount(repo, startDate, endDate);
