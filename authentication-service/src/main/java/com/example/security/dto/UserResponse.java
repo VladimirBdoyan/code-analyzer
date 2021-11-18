@@ -3,7 +3,6 @@ package com.example.security.dto;
 import com.example.security.model.Authority;
 import com.example.security.model.enums.Role;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +10,6 @@ import java.util.Set;
 public class UserResponse {
     private String username;
     private boolean enabled;
-    private boolean isActive;
     private Role role;
     private Set<Authority> authorities = new HashSet<>();
 
@@ -27,14 +25,6 @@ public class UserResponse {
 
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
     public void setEnabled(boolean enabled) {
@@ -75,7 +65,6 @@ public class UserResponse {
         return "UserResponse{" +
                 "username='" + username + '\'' +
                 ", enabled=" + enabled +
-                ", isActive=" + isActive +
                 ", role=" + role +
                 ", authorities=" + authorities +
                 '}';

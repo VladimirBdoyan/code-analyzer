@@ -1,6 +1,9 @@
 package com.example.security.model;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 

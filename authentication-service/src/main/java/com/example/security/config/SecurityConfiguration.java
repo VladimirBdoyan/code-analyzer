@@ -2,7 +2,6 @@ package com.example.security.config;
 
 import com.example.security.repository.UserRepository;
 import com.example.security.security.JwtAuthenticationFilter;
-import com.example.security.security.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,12 +23,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final UserRepository userRepository;
-    private final JwtTokenProvider jwtTokenProvider;
 
-    public SecurityConfiguration(UserDetailsService userDetailsService, UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
+    public SecurityConfiguration(UserDetailsService userDetailsService, UserRepository userRepository) {
         this.userDetailsService = userDetailsService;
         this.userRepository = userRepository;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -46,18 +43,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // add jwt filters (1. authentication, 2. authorization)
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtTokenProvider))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                //.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
                .authorizeRequests()
                 // configure access rules
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers("/register").permitAll()
-                .antMatchers("/Autentication").authenticated()
-                .antMatchers("/admins/*").hasRole("ADMIN")
-                .antMatchers("/users/*").hasAnyRole("USER")
+                .antMatchers("/phone/**").permitAll()
+                .antMatchers("/company").hasAnyRole("COMPANY")
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/user/*").hasAnyRole("USER")
                 .and()
                 .logout()
-                .logoutUrl("/logout")
+                .logoutUrl("/logout").logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
     }

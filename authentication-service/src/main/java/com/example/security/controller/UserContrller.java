@@ -1,8 +1,8 @@
 package com.example.security.controller;
 
-import com.example.security.config.JwtTokenProvider;
 import com.example.security.dto.UserRequest;
 import com.example.security.dto.UserResponse;
+import com.example.security.dto.mapper.UserResponseMapper;
 import com.example.security.model.Authority;
 import com.example.security.model.User;
 import com.example.security.model.enums.AuthorityTypes;
@@ -19,24 +19,13 @@ import java.util.Optional;
 public class UserContrller {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
     private final CodeService codeService;
 
-    public UserContrller(UserService userService, JwtTokenProvider jwtTokenProvider, CodeService codeService) {
+    public UserContrller(UserService userService, CodeService codeService) {
         this.userService = userService;
-        this.jwtTokenProvider = jwtTokenProvider;
         this.codeService = codeService;
     }
 
-    @PostMapping("/login")
-    public String login(@RequestBody UserRequest userRequest) {
-        Optional<UserResponse> user = userService.getByLoginAndPassword(userRequest.getUsername(), userRequest.getPassword());
-        if (user.isPresent() && user.get().isEnabled()) {
-            user.get().setActive(true);
-            return jwtTokenProvider.jwtTockenCreator(user.get());
-        }
-        return null;
-    }
 
     @PostMapping("/register")
     public ResponseEntity registration(@RequestBody UserRequest userRequest, @RequestParam String userType) {
@@ -51,10 +40,8 @@ public class UserContrller {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
             }
-            user.setEnabled(false);
-            user.setActive(false);
-            userService.update(user);
-            return ResponseEntity.of(Optional.of(user));
+            userService.create(user);
+            return ResponseEntity.of(Optional.of(UserResponseMapper.mapToUserResponse(user)));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("user with " + user.getUsername() + " username alredy exist");
     }
@@ -78,15 +65,6 @@ public class UserContrller {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found");
     }
 
-    @GetMapping("logout")
-    public void logout(String username){
-        Optional<UserResponse> user=userService.getByLogin(username);
-        if (user.isPresent() && user.get().isActive() ){
-            user.get().setActive(false);
-            userService.update(user.get());
-        }
-
-    }
-
-
+    @PostMapping("/logout")
+    public void logout(){}
 }

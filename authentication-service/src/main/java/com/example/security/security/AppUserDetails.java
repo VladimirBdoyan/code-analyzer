@@ -65,6 +65,6 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user == null || user.isEnabled();
+        return user.isEnabled();
     }
 }

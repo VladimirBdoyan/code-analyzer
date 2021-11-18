@@ -1,9 +1,7 @@
 package com.example.security.service;
 
 import com.example.security.dto.UserResponse;
-import com.example.security.dto.mapper.UserRequestMapper;
 import com.example.security.dto.mapper.UserResponseMapper;
-import com.example.security.model.Authority;
 import com.example.security.model.User;
 import com.example.security.repository.AuthorityRepository;
 import com.example.security.repository.UserRepository;
@@ -52,7 +50,15 @@ public class UserService {
         if (user==null){
             return Optional.empty();
         }
-        return UserResponseMapper.mapToUserResponse(userRepository.save(UserResponseMapper.mapToUserUserEntity(user).get()));
+        Optional<User> user1=get(user.getUsername());
+        if(user1.isPresent()){
+            String password=user1.get().getPassword();
+            user1=UserResponseMapper.mapToUserUserEntity(user);
+            user1.get().setPassword(password);
+            userRepository.save(user1.get());
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 
     public Optional<User> get(String username) {
@@ -61,7 +67,7 @@ public class UserService {
 
     public Optional<UserResponse> getByLogin(String login) {
 
-        return UserResponseMapper.mapToUserResponse(userRepository.findByUsernameEager(login).get());
+        return UserResponseMapper.mapToUserResponse(userRepository.findByUsername(login));
     }
 
     public Optional<UserResponse> getByLoginAndPassword(String login, String password) {
