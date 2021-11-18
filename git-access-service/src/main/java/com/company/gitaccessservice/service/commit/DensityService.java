@@ -5,5 +5,7 @@ import com.company.gitaccessservice.dto.commit.RequestDto;
 
 public interface DensityService {
     GitAccessCommitDetailsDto getCommitDensityByOrg(RequestDto request);
-    GitAccessCommitDetailsDto getCommitDensityByRepo(RequestDto request);
+    GitAccessCommitDetailsDto getCommitDensityByOrgRepo(RequestDto request);
+    GitAccessCommitDetailsDto getCommitDensityByUserRepo(RequestDto request);
+    GitAccessCommitDetailsDto getCommitDensityByUser(RequestDto request);
 }

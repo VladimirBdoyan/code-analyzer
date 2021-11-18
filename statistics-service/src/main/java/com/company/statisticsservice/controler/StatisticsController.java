@@ -56,7 +56,7 @@ public class StatisticsController {
 
         Date since = request.getStartDate();
         Date till = request.getEndDate();
-        String login = request.getUsername();
+        String login = request.getLogin();
         String repo = request.getRepoName();
         String orgName = request.getOrganization();
 
@@ -76,13 +76,13 @@ public class StatisticsController {
 
         if (gitUser == null || repository == null || organization == null) {
             gitAccessResponseDto = restRequest.requestGitAccess(request);
-            if (organization == null) {
+            if (organization == null && orgName != null) {
                 organization = organizationService.createOrganization(gitAccessResponseDto);
             }
             if (gitUser == null) {
                 gitUser = gitUserService.createUser(gitAccessResponseDto, organization);
             }
-            if (repo != null) {
+            if (repository == null && repo != null) {
                 repository = gitRepositoryService.createGitRepo(gitAccessResponseDto, gitUser, organization);
             }
         } else {

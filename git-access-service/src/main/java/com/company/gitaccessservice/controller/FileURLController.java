@@ -22,10 +22,25 @@ public class FileURLController {
 
     @GetMapping()
     public List<URL> getDeveloperCommitURL(@RequestBody RequestDto urlDto) {
-        if (urlDto.getRepoName() == null) {
+        String repo = null;
+        String org = null;
+        try {
+            repo = urlDto.getRepoName();
+            org = urlDto.getOrganization();
+        } catch (NullPointerException e) {
+            repo = null;
+            org = null;
+        }
+
+
+        if (repo == null && org == null) {
+            return fileURLService.getFileURLbyUser(urlDto);
+        } else if (repo != null && org == null) {
+            return fileURLService.getFileURLbyUserRepo(urlDto);
+        } else if (repo == null && org != null) {
             return fileURLService.getFileURLbyOrg(urlDto);
         } else {
-            return fileURLService.getFileURLbyRepo(urlDto);
+            return fileURLService.getFileURLbyOrgRepo(urlDto);
         }
     }
 }

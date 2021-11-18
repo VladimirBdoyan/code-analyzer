@@ -1,6 +1,7 @@
 package com.company.gitaccessservice.util;
 
 import com.company.gitaccessservice.model.GitOrganization;
+import com.company.gitaccessservice.model.GitUser;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.github.GHCommitQueryBuilder;
 import org.kohsuke.github.GHRepository;
