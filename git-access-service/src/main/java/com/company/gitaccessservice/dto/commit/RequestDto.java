@@ -3,18 +3,18 @@ package com.company.gitaccessservice.dto.commit;
 import java.util.Date;
 
 public class RequestDto {
-    private String username;
+    private String login;
     private String organization;
     private String repoName;
     private Date startDate;
     private Date endDate;
 
-    public String getUsername() {
-        return username;
+    public String getlogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setlogin(String login) {
+        this.login = login;
     }
 
     public String getOrganization() {

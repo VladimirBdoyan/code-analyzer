@@ -1,20 +1,22 @@
 package com.company.statisticsservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class RequestDto {
-    private String username;
+    private String login;
     private String organization;
     private String repoName;
     private Date startDate;
     private Date endDate;
-
-    public String getUsername() {
-        return username;
+    @JsonProperty("login")
+    public String getLogin() {
+        return login;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
+    @JsonProperty("login")
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getOrganization() {

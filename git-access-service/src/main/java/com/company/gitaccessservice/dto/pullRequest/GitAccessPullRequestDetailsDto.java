@@ -38,6 +38,31 @@ public class GitAccessPullRequestDetailsDto {
         this.pullRequestCommitCountByEveryOne = pullRequestCommitCountByEveryOne;
         this.pullRequestCommitCommentCount = pullRequestCommitCommentCount;
     }
+    public GitAccessPullRequestDetailsDto( String userName, Integer pullRequestCountByGitUser
+            , Integer pullRequestCountByEveryOne, Integer pullRequestConversationCount
+            , Integer pullRequestCommitCountByUser, Integer pullRequestCommitCountByEveryOne
+            , Integer pullRequestCommitCommentCount) {
+        this.userName = userName;
+        this.PullRequestCountByGitUser = pullRequestCountByGitUser;
+        this.PullRequestCountByEveryOne = pullRequestCountByEveryOne;
+        this.pullRequestConversationCount = pullRequestConversationCount;
+        this.pullRequestCommitCountByUser = pullRequestCommitCountByUser;
+        this.pullRequestCommitCountByEveryOne = pullRequestCommitCountByEveryOne;
+        this.pullRequestCommitCommentCount = pullRequestCommitCommentCount;
+    }
+    public GitAccessPullRequestDetailsDto(Integer pullRequestCountByGitUser, String userName,String repoName
+            , Integer pullRequestCountByEveryOne, Integer pullRequestConversationCount
+            , Integer pullRequestCommitCountByUser, Integer pullRequestCommitCountByEveryOne
+            , Integer pullRequestCommitCommentCount) {
+        this.userName = userName;
+        this.repoName = repoName;
+        this.PullRequestCountByGitUser = pullRequestCountByGitUser;
+        this.PullRequestCountByEveryOne = pullRequestCountByEveryOne;
+        this.pullRequestConversationCount = pullRequestConversationCount;
+        this.pullRequestCommitCountByUser = pullRequestCommitCountByUser;
+        this.pullRequestCommitCountByEveryOne = pullRequestCommitCountByEveryOne;
+        this.pullRequestCommitCommentCount = pullRequestCommitCommentCount;
+    }
 
     public GitAccessPullRequestDetailsDto() {
     }
