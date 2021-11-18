@@ -44,13 +44,12 @@ public class StatisticsController {
     }
 
     @GetMapping()
-    public List<StatisticsReportDto> getPRDensityTotal(@RequestBody RequestDto request) {
+    public StatisticsReportDto getPRDensityTotal(@RequestBody RequestDto request) {
 
         RestRequest restRequest = RestRequest.getRestRequest();
 
         GitAccessResponseDto gitAccessResponseDto;
-        List<StatisticsReportDto> reportDto = new ArrayList<>();
-        StatisticsReportDto statisticsReportDto ;
+        StatisticsReportDto statisticsReportDto = null;
         CommitDensity commitDensity;
         PullRequestReport pullRequestReport;
 
@@ -89,17 +88,17 @@ public class StatisticsController {
             commitDensity = commitDensityService.getReportByParamsOrg(organization, gitUser, since, till);
             pullRequestReport = pullRequestReportService.getPullRequestReportsByParamsOrg(organization, gitUser, since, till);
             statisticsReportDto = StatisticsReportDtoMapper.mapToDto(commitDensity,pullRequestReport);
-            reportDto.add(statisticsReportDto);
+            
         }
 
-        if (reportDto.isEmpty() || reportDto.get(0) == null) {
+        if ( statisticsReportDto == null) {
             gitAccessResponseDto = restRequest.requestGitAccess(request);
             commitDensity = commitDensityService.creatReport(organization, gitUser, repository, gitAccessResponseDto);
             pullRequestReport = pullRequestReportService.createReport(organization, gitUser, repository, gitAccessResponseDto);
             //TODO Check why commitDensity not have userName
             statisticsReportDto = StatisticsReportDtoMapper.mapToDto(commitDensity,pullRequestReport);
-            reportDto.add(statisticsReportDto);
+            
         }
-        return reportDto;
+        return statisticsReportDto;
     }
 }

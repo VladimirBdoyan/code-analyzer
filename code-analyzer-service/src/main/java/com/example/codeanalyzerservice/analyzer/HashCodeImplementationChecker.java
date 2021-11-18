@@ -1,6 +1,9 @@
 package com.example.codeanalyzerservice.analyzer;
 
 
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -9,27 +12,28 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+@RequiredArgsConstructor
 public class HashCodeImplementationChecker implements Checker {
 
-    private MethodDeclaration md;
-    private Object arg;
+    private final MethodDeclaration md;
+    private final AnalyzeResult arg;
 
-    public HashCodeImplementationChecker(MethodDeclaration md, Object arg) {
-        this.md = md;
-        this.arg = arg;
-    }
 
     @Override
     public void check() {
+        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
+
         System.out.println("Analyzing method: " + md.getName());
         if (!md.getBody().isPresent()) {
-            System.out.println("Empty method body");
+            return;
         }
 
         if (!md.getNameAsString().equals("hashCode")) {
@@ -40,7 +44,13 @@ public class HashCodeImplementationChecker implements Checker {
         List<ReturnStmt> returnStatements = body.findAll(ReturnStmt.class);
 
         if (returnStatements.size() > 1) {
-            System.out.println("Bad score: multiple return statements in hashCodeMethod");
+            arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+            arg.setMaxRate(arg.getMaxRate() + coefficient);
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.MEDIUM);
+            codeSmell.setMessage("Bad score: multiple return statements in hashCodeMethod");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.MEDIUM.getCoefficient());
         }
 
         ReturnStmt returnStmt = returnStatements.get(0);
@@ -48,7 +58,7 @@ public class HashCodeImplementationChecker implements Checker {
         List<FieldDeclaration> fields = md.getParentNode()
                 .get().findAll(FieldDeclaration.class,
                         (fieldDeclaration -> fieldDeclaration.getAnnotations().stream()
-                                    .map(AnnotationExpr::getNameAsString).anyMatch((s) -> s.equals("Id"))
+                                .map(AnnotationExpr::getNameAsString).anyMatch((s) -> s.equals("Id"))
                         ));
 
         Set<String> pkFields = new HashSet<>();
@@ -76,12 +86,15 @@ public class HashCodeImplementationChecker implements Checker {
         Expression expression = returnStmt.getExpression().get();
 
         List<SimpleName> extraFields = expression.findAll(SimpleName.class,
-                (sn) -> (!pkFields.contains(sn.asString())&& unFields.contains(sn.asString())));
-
+                (sn) -> (!pkFields.contains(sn.asString()) && unFields.contains(sn.asString())));
 
 
         if (extraFields.size() > 0) {
-            System.out.println("Bad code: Only @Id annotated fields must be in hashCode()");
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.LOW);
+            codeSmell.setMessage("Bad code: Only @Id annotated fields must be in hashCode()");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }
 
 

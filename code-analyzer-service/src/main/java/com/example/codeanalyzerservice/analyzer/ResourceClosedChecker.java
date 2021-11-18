@@ -25,9 +25,9 @@ public class ResourceClosedChecker implements Checker {
             return;
         }
 
-        int coefficient= CodeSmellCategory.HIGH.getCoefficient();
-        arg.setCurrentRate(arg.getCurrentRate()+coefficient);
-        arg.setMaxRate(arg.getMaxRate()+coefficient);
+        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
 
         Set<String> closable = new HashSet<>();
 
@@ -56,10 +56,10 @@ public class ResourceClosedChecker implements Checker {
             if (expressionStmt.getExpression().isMethodCallExpr()) {
                 System.out.println(expressionStmt.getExpression().asMethodCallExpr().getName());
                 for (String var : closable) {
-                    if(!expressionStmt
+                    if (!expressionStmt
                             .getExpression().asMethodCallExpr()
                             .getName().getIdentifier().contains(var + ".close()")) {
-                     methodCallExpCount++;
+                        methodCallExpCount++;
                     }
                 }
             }

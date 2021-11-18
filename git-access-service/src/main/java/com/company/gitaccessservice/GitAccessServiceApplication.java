@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class GitAccessServiceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(GitAccessServiceApplication.class, args);
     }
-
 }

@@ -1,70 +1,98 @@
 package com.example.codeanalyzerservice.analyzer;
 
+import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import com.example.codeanalyzerservice.entity.CodeSmell;
+import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
-public class AbstractClassChecker implements Checker{
+@RequiredArgsConstructor
+public class AbstractClassChecker implements Checker {
     private final ClassOrInterfaceDeclaration clazz;
+    private final AnalyzeResult arg;
 
-    public AbstractClassChecker(ClassOrInterfaceDeclaration clazz) {
-        this.clazz = clazz;
-    }
 
     @Override
     public void check() {
-        if (clazz.isInterface()){
+        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
+
+        if (clazz.isInterface()) {
             return;
         }
 
-        NodeList<Modifier> modifiers=clazz.getModifiers();
+        NodeList<Modifier> modifiers = clazz.getModifiers();
         System.out.println("Analyzing class: " + clazz.getName());
-        if (!modifiers.contains(Modifier.abstractModifier())){
+        if (!modifiers.contains(Modifier.abstractModifier())) {
             return;
         }
 
-        if (modifiers.contains(Modifier.finalModifier())){
-            System.out.println("An abstract class cannot be declared as final");
+        if (modifiers.contains(Modifier.finalModifier())) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.LOW);
+            codeSmell.setMessage("An abstract class cannot be declared as final");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }
 
-        List<VariableDeclarator> variableDeclarators=clazz.findAll(VariableDeclarator.class);
-        if (variableDeclarators.isEmpty()){
-            System.out.println(clazz.getName()+": Abstract class without fields should be converted to interfaces");
-
+        List<VariableDeclarator> variableDeclarators = clazz.findAll(VariableDeclarator.class);
+        if (variableDeclarators.isEmpty()) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.LOW);
+            codeSmell.setMessage(": Abstract class without fields should be converted to interfaces");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }
 
-        List<ConstructorDeclaration> constructorDeclarations=clazz.getConstructors();
+        List<ConstructorDeclaration> constructorDeclarations = clazz.getConstructors();
         if (!constructorDeclarations.isEmpty()) {
             boolean hasdefaltOrPublicConstructor = false;
             for (ConstructorDeclaration cd : constructorDeclarations) {
-                if (cd.getModifiers().contains(Modifier.publicModifier())||
-                        cd.getModifiers().isEmpty()){
-                    hasdefaltOrPublicConstructor=true;
+                if (cd.getModifiers().contains(Modifier.publicModifier()) ||
+                        cd.getModifiers().isEmpty()) {
+                    hasdefaltOrPublicConstructor = true;
                 }
             }
-            if (!hasdefaltOrPublicConstructor){
-                System.out.println("An abstract class must have non private constructor");
+            if (!hasdefaltOrPublicConstructor) {
+                CodeSmell codeSmell = new CodeSmell();
+                codeSmell.setCategory(CodeSmellCategory.LOW);
+                codeSmell.setMessage("An abstract class must have non private constructor");
+                arg.getCodeSmells().add(codeSmell);
+                arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
             }
         }
 
-        List<MethodDeclaration> methodDeclarations=clazz.getMethods();
-        if (methodDeclarations.isEmpty()){
-            System.out.println("An abstract class must have methods");
-            return;
+        List<MethodDeclaration> methodDeclarations = clazz.getMethods();
+        int coefficient1 = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient1);
+        if (methodDeclarations.isEmpty()) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.LOW);
+            codeSmell.setMessage("An abstract class must have methods");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
+
         }
-        boolean hasAbstractMethod=false;
-        for (MethodDeclaration md:methodDeclarations){
-            if (md.getModifiers().contains(Modifier.abstractModifier())){
-                hasAbstractMethod=true;
+        boolean hasAbstractMethod = false;
+        for (MethodDeclaration md : methodDeclarations) {
+            if (md.getModifiers().contains(Modifier.abstractModifier())) {
+                hasAbstractMethod = true;
             }
         }
-        if (!hasAbstractMethod){
-            System.out.println("An abstract class must have abstract methods");
+        if (!hasAbstractMethod) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.MEDIUM);
+            codeSmell.setMessage("An abstract class must have abstract methods");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.MEDIUM.getCoefficient());
         }
     }
 }
