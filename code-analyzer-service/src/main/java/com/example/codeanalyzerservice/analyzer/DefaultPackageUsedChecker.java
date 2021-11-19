@@ -6,10 +6,9 @@ import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import lombok.RequiredArgsConstructor;
 
-
-
 @RequiredArgsConstructor
 public class DefaultPackageUsedChecker implements Checker {
+
     private final CompilationUnit n;
     private final AnalyzeResult arg;
 

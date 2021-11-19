@@ -1,5 +1,6 @@
 package com.example.codeanalyzerservice.analyzer;
 
+import com.example.codeanalyzerservice.constants.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 public class ResourceClosedChecker implements Checker {
+
     private final MethodDeclaration n;
     private final AnalyzeResult arg;
 
@@ -39,7 +41,7 @@ public class ResourceClosedChecker implements Checker {
                     List<ResolvedReferenceType> allInterfacesAncestors = type.asReferenceType().getAllInterfacesAncestors();
                     System.out.println(allInterfacesAncestors);
                     for (ResolvedReferenceType resolvedReferenceType : allInterfacesAncestors) {
-                        if ("java.io.Closeable".equals(resolvedReferenceType.getQualifiedName())) {
+                        if (JavaKeyWords.CLOSEABLE.equals(resolvedReferenceType.getQualifiedName())) {
                             closable.add(variableDeclarator.getName().asString());
                         }
                     }
@@ -47,22 +49,27 @@ public class ResourceClosedChecker implements Checker {
             });
         }
 
-        System.out.println(closable);
-
         List<ExpressionStmt> all = n.findAll(ExpressionStmt.class);
 
-        int methodCallExpCount = 0;
+        int closeCallExpCount = 0;
         for (ExpressionStmt expressionStmt : all) {
             if (expressionStmt.getExpression().isMethodCallExpr()) {
-                System.out.println(expressionStmt.getExpression().asMethodCallExpr().getName());
                 for (String var : closable) {
                     if (!expressionStmt
                             .getExpression().asMethodCallExpr()
                             .getName().getIdentifier().contains(var + ".close()")) {
-                        methodCallExpCount++;
+                        closeCallExpCount++;
                     }
                 }
             }
+        }
+
+        if (closable.size() != closeCallExpCount) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.HIGH);
+            codeSmell.setMessage("More than two variables should not be declared in one line");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate()-coefficient);
         }
     }
 }

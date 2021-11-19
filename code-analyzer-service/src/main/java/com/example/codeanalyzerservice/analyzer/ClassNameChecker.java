@@ -6,10 +6,10 @@ import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 public class ClassNameChecker implements Checker {
+
     private final ClassOrInterfaceDeclaration n;
     private final AnalyzeResult arg;
 

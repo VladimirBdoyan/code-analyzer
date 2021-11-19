@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class OneLineVariablesDeclarationChecker implements Checker {
+
     private final CompilationUnit n;
     private final AnalyzeResult arg;
 

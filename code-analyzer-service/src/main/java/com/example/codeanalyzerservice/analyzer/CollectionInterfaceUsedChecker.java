@@ -1,5 +1,6 @@
 package com.example.codeanalyzerservice.analyzer;
 
+import com.example.codeanalyzerservice.constants.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CollectionInterfaceUsedChecker implements Checker {
+
     private final CompilationUnit n;
     private final AnalyzeResult arg;
 
@@ -30,7 +32,7 @@ public class CollectionInterfaceUsedChecker implements Checker {
                 if (type.asReferenceType().getTypeDeclaration().orElseThrow(RuntimeException::new).isClass()) {
                     boolean isCollectionLCass = type.asReferenceType().getAllAncestors().stream().
                             anyMatch(resolvedReferenceType ->
-                                    "java.util.Collection".equals(resolvedReferenceType.getQualifiedName())
+                                    JavaKeyWords.COLLECTION.equals(resolvedReferenceType.getQualifiedName())
                             );
 
                     if (isCollectionLCass) {

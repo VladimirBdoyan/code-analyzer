@@ -1,6 +1,7 @@
 package com.example.codeanalyzerservice.analyzer;
 
 
+import com.example.codeanalyzerservice.constants.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -27,18 +28,17 @@ public class HashCodeImplementationChecker implements Checker {
 
     @Override
     public void check() {
-        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
-        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
-        arg.setMaxRate(arg.getMaxRate() + coefficient);
-
-        System.out.println("Analyzing method: " + md.getName());
         if (!md.getBody().isPresent()) {
             return;
         }
 
-        if (!md.getNameAsString().equals("hashCode")) {
+        if (!md.getNameAsString().equals(JavaKeyWords.HASH_CODE)) {
             return;
         }
+
+        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
 
         BlockStmt body = md.getBody().get();
         List<ReturnStmt> returnStatements = body.findAll(ReturnStmt.class);
@@ -96,29 +96,5 @@ public class HashCodeImplementationChecker implements Checker {
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }
-
-
-//        Set<String> variableNames = new HashSet<>();
-//        for (Statement statement : body.getStatements()) {
-//            System.out.println(statement);
-//            List<VariableDeclarator> varDeclarations = statement.findAll(VariableDeclarator.class);
-//            Set<String> newVars = new HashSet<>();
-//            for (VariableDeclarator variableDeclarator : varDeclarations) {
-//                variableNames.add(variableDeclarator.getNameAsString());
-//                newVars.add(variableDeclarator.getNameAsString());
-//            }
-//
-//            for (Node node: statement.getChildNodes()) {
-//                Set<String> usages = node.findAll(SimpleName.class, (n) ->
-//                        variableNames.contains(n.asString()) && !newVars.contains(n.asString())
-//                ).stream().map(SimpleName::asString).collect(Collectors.toSet());
-//
-//                variableNames.removeAll(usages);
-//            }
-//        }
-//
-//        for (String unusedVar : variableNames) {
-//            System.out.println("Unused variable: " + unusedVar);
-//        }
     }
 }

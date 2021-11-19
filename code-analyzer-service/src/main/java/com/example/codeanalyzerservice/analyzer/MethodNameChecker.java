@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MethodNameChecker implements Checker {
+
     private final MethodDeclaration n;
     private final AnalyzeResult arg;
 

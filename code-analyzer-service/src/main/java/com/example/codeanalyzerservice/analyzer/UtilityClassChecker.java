@@ -21,10 +21,6 @@ public class UtilityClassChecker implements Checker {
 
     @Override
     public void check() {
-        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
-        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
-        arg.setMaxRate(arg.getMaxRate() + coefficient);
-
         if (clazz.isInterface()) {
             return;
         }
@@ -36,8 +32,12 @@ public class UtilityClassChecker implements Checker {
             }
         }
 
+        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
+
         NodeList<Modifier> modifiers = clazz.getModifiers();
-        System.out.println("Analyzing class: " + clazz.getName());
+
         if (!modifiers.contains(Modifier.finalModifier())) {
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.MEDIUM);
@@ -55,7 +55,5 @@ public class UtilityClassChecker implements Checker {
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }
-
-
     }
 }

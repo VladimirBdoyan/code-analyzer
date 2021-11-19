@@ -1,5 +1,6 @@
 package com.example.codeanalyzerservice.analyzer;
 
+import com.example.codeanalyzerservice.constants.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class NullPointerExceptionCaughtChecker implements Checker {
+
     private final CatchClause n;
     private final AnalyzeResult arg;
 
@@ -18,7 +20,7 @@ public class NullPointerExceptionCaughtChecker implements Checker {
         arg.setCurrentRate(arg.getCurrentRate()+coefficient);
         arg.setMaxRate(arg.getMaxRate()+coefficient);
 
-        if (n.getParameter().getType().asString().contains("NullPointerException")) {
+        if (n.getParameter().getType().asString().contains(JavaKeyWords.NULL_POINTER_EXCEPTION)) {
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.MEDIUM);
             codeSmell.setMessage("NullPointer Exception should not be caught");

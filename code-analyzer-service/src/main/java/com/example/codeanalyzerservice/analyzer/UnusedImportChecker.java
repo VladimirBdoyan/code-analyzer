@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 public class UnusedImportChecker implements Checker {
+
     private final CompilationUnit n;
     private final AnalyzeResult arg;
 
