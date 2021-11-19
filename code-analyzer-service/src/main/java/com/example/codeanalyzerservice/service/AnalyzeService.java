@@ -40,7 +40,7 @@ public class AnalyzeService {
 //        ResponseEntity<List<URL>> response = restTemplate.exchange("http://localhost:8080/api/v1/git-access/URL", HttpMethod.POST, null,
 //                new ParameterizedTypeReference<List<URL>>() {
 //                }, analyzeRequest);
-        GitAccessResponseDTO response = restTemplate.postForObject("http://localhost:8080/api/v1/git-access/URL",analyzeRequest,GitAccessResponseDTO.class);
+        GitAccessResponseDTO response = restTemplate.postForObject("http://localhost:8083/api/v1/git-access/URL",analyzeRequest,GitAccessResponseDTO.class);
 
 
 //        if (response.getStatusCode().is4xxClientError()) {

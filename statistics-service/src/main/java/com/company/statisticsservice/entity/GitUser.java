@@ -16,10 +16,10 @@ public class GitUser {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login")
     private String login;
 
 
