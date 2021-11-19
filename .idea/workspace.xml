@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="565acc70-40b6-4f73-ae99-0d3be21fe329" name="Changes" comment="Add Statistics and Access service">
+      <change afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/util/RequestURL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/controller/MasterServiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/codeAnalyzerResponse/AnalyzeServiceReportDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/codeAnalyzerResponse/AnalyzeServiceResultDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/codeAnalyzerResponse/CodeSmellDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/util/RequestURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/dto/CodeSmellDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/dto/CodeSmellDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/service/AnalyzeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/service/AnalyzeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/costant/GitHubToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/costant/GitHubToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/AnalyzeDeveloperApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/controller/AnalyzeDeveloperController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/AnalyzeReportDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/AnalyzeRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/AnalyzeStateDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/CommitDensityDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/JobDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/PullRequestReportDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/StatisticsReportDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/mapper/AnalyzeReportMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/dto/mapper/AnalyzeStateMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/AnalyzeReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/AnalyzeState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/BugEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/CodeAnalyzeReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/Developer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/Organization.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/Repository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/entity/enums/ReportStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/repository/AnalyzeReportRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/repository/AnalyzeStateRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzeReportService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzeReportServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzeStateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzeStateServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzerServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzerStateTrackerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/AnalyzerStateTrackerServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/analyzedeveloper/service/model/Context.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/master-service/src/test/java/com/example/analyzedeveloper/AnalyzeDeveloperApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/controler/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/controler/StatisticsController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/authentication-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/code-analyzer-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/git-access-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/master-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/statistics-service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/statistics-service">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/code-analyzer-service">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/master-service">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="master-service" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="master-service" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="master-service" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="false" />
+        <entry key="JPA Palette" value="false" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="20eUvjLryNpYr52BpbnJPJLSitL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Downloads/vaxara" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\VLAD\code-analyzer\statistics-service\src\main\java\com\company\statisticsservice" />
+      <recent name="C:\Users\VLAD\code-analyzer\git-access-service\src\main\java\com\company\gitaccessservice" />
+      <recent name="C:\Users\VLAD\code-analyzer\authentication-service\src\main\resources" />
+      <recent name="C:\Users\VLAD\code-analyzer\code-analyzer-service\src\main" />
+      <recent name="C:\Users\VLAD\code-analyzer\git-access-service\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\VLAD\code-analyzer\statistics-service\src\main" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.company.statisticsservice.dto" />
+      <recent name="com.company.statisticsservice.util" />
+      <recent name="com.company.statisticsservice" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.master-service [build]">
+    <configuration name="code-analyzer-service [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/code-analyzer-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="code-analyzer-service [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/code-analyzer-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="master-service [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/master-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="master-service [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/master-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnalyzeDeveloperApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="analyze-developer.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.analyzedeveloper.MasterService" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="authentication-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.company.authenticationservice.AuthenticationServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CodeAnalyzerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="code-analyzer-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.codeanalyzerservice.CodeAnalyzerServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GitAccessServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <module name="git-access-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.company.gitaccessservice.GitAccessServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MasterService" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="master-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.analyzedeveloper.MasterService" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="authentication-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.security.SecurityApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StatisticsServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="statistics-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.company.statisticsservice.StatisticsServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.master-service [build]" />
+        <item itemvalue="Gradle.master-service [clean]" />
+        <item itemvalue="Gradle.code-analyzer-service [build]" />
+        <item itemvalue="Spring Boot.GitAccessServiceApplication" />
+        <item itemvalue="Gradle.code-analyzer-service [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBeansView">
+    <option name="beanDetailsProportion" value="0.3" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="565acc70-40b6-4f73-ae99-0d3be21fe329" name="Changes" comment="" />
+      <created>1636404811931</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636404811931</updated>
+      <workItem from="1636404815461" duration="61658000" />
+      <workItem from="1636621171369" duration="37699000" />
+      <workItem from="1636701912272" duration="16987000" />
+      <workItem from="1636732864605" duration="151623000" />
+      <workItem from="1637218070572" duration="33500000" />
+      <workItem from="1637284758481" duration="6922000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add Statistics and Access service">
+      <created>1636444602999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1636444602999</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="7f498e8f-9361-4aee-9fac-58b06ff47ce0">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add Statistics and Access service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Statistics and Access service" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/model/GitOrganization.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="225" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/service/commit/DensityServiceImpl.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="257" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/GitRepoDownload.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="260" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/GitRepoDownload.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="261" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
