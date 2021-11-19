@@ -14,8 +14,6 @@ import com.company.statisticsservice.dto.statisticsResponse.StatisticsReportDto;
 import com.company.statisticsservice.entity.*;
 import com.company.statisticsservice.util.RestRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
