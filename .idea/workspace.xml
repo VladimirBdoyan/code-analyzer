@@ -5,36 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="565acc70-40b6-4f73-ae99-0d3be21fe329" name="Changes" comment="fixed">
-      <change afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/security/JwtAuthorizationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/security/SecurityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/security/AuthenticationServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/security/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/security/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/test/java/com/example/security/SecurityApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/analyzer/OneLineVariablesDeclarationChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/analyzer/OneLineVariablesDeclarationChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/dto/CodeSmellDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/dto/CodeSmellDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/AnalyzeReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/AnalyzeReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/AnalyzeResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/AnalyzeResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/CodeSmell.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/entity/CodeSmell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/util/RequestURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/java/com/example/codeanalyzerservice/util/RequestURL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code-analyzer-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/code-analyzer-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/costant/GitHubToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/git-access-service/src/main/java/com/company/gitaccessservice/util/costant/GitHubToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/controller/AnalyzeDeveloperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/controller/AnalyzeDeveloperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/AnalyzeStateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/AnalyzeStateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/JobDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/JobDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/PullRequestReportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/dto/PullRequestReportDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/entity/CodeAnalyzeReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/entity/CodeAnalyzeReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/security/JWTAuthorizationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/java/com/example/masterservice/security/JWTAuthorizationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/master-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/controler/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/controler/StatisticsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/dto/statisticsResponse/CommitDensityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/dto/statisticsResponse/CommitDensityDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/dto/statisticsResponse/PullRequestReportDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/dto/statisticsResponse/PullRequestReportDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/CommitDensity.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/CommitDensity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitOrganization.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitOrganization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/GitUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/PullRequestReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/java/com/company/statisticsservice/entity/PullRequestReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistics-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/statistics-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +313,7 @@
       <workItem from="1637218070572" duration="33500000" />
       <workItem from="1637284758481" duration="6922000" />
       <workItem from="1637570235450" duration="217000" />
-      <workItem from="1637570502899" duration="10260000" />
+      <workItem from="1637570502899" duration="10568000" />
     </task>
     <task id="LOCAL-00001" summary="Add Statistics and Access service">
       <created>1636444602999</created>
