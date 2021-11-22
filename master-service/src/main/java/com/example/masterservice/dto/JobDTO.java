@@ -8,9 +8,4 @@ import java.util.UUID;
 public class JobDTO {
     private UUID jobId;
     private String message = "In progress";
-
-    public JobDTO(UUID jobId, String message){
-        this.jobId = jobId;
-        this.message = message;
-    }
 }

@@ -8,6 +8,5 @@ import java.util.UUID;
 public interface AnalyzeStateService {
     AnalyzeStateDTO get(UUID jobId);
     AnalyzeState save(AnalyzeState state);
-     void delete(UUID jobId);
-
+    void delete(UUID jobId);
 }

@@ -5,7 +5,6 @@ import com.example.codeanalyzerservice.exception.ResourceNotFoundException;
 import com.example.codeanalyzerservice.repository.AnalyzeReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

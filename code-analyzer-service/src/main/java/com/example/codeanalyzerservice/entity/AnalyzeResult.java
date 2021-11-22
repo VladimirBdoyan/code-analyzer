@@ -15,6 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "analyze_result")
 public class AnalyzeResult {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

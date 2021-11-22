@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UnusedVariableChecker implements Checker {
 
-    private final MethodDeclaration md;
+    private final MethodDeclaration n;
     private final AnalyzeResult arg;
 
 
@@ -28,11 +28,11 @@ public class UnusedVariableChecker implements Checker {
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);
 
-        if (!md.getBody().isPresent()) {
+        if (!n.getBody().isPresent()) {
             return;
         }
 
-        BlockStmt body = md.getBody().get();
+        BlockStmt body = n.getBody().get();
         Set<String> variableNames = new HashSet<>();
         for (Statement statement : body.getStatements()) {
             List<VariableDeclarator> varDeclarations = statement.findAll(VariableDeclarator.class);
@@ -54,7 +54,7 @@ public class UnusedVariableChecker implements Checker {
         if(!variableNames.isEmpty()){
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.MEDIUM);
-            codeSmell.setMessage("Should not bew unused variable");
+            codeSmell.setMessage("Should not be unused variable");
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - coefficient);
         }

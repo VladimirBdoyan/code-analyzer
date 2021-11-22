@@ -19,7 +19,9 @@ public class AnalyzeStateServiceImpl implements AnalyzeStateService {
 
     @Override
     public AnalyzeStateDTO get(UUID jobId) {
-        return AnalyzeStateMapper.mapToDTO(analyzeStateRepository.findById(jobId).orElseThrow(()->{throw new RuntimeException("Not found"); }));
+        return AnalyzeStateMapper.mapToDTO(analyzeStateRepository
+                .findById(jobId)
+                .orElseThrow(()->{throw new RuntimeException("Not found"); }));
     }
 
     @Override

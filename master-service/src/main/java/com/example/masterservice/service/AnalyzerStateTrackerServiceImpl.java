@@ -1,13 +1,9 @@
 package com.example.masterservice.service;
 
-import com.example.masterservice.dto.AnalyzeStateDTO;
 import com.example.masterservice.entity.AnalyzeState;
 import com.example.masterservice.entity.enums.ReportStatus;
-import com.example.masterservice.repository.AnalyzeStateRepository;
-import com.example.masterservice.service.model.Context;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;

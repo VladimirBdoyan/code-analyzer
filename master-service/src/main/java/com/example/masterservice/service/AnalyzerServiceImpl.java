@@ -19,7 +19,7 @@ public class AnalyzerServiceImpl implements AnalyzeService {
     private final AnalyzeReportRepository analyzeReportRepository;
 
     @Async
-   // @Transactional
+    @Transactional
     @Override
     public void analyze(UUID jobId, AnalyzeRequestDTO analyzeRequest) {
         AnalyzeReport analyzeReport = null;
@@ -29,8 +29,8 @@ public class AnalyzerServiceImpl implements AnalyzeService {
             analyzeState = analyzerStateTrackerService.init(jobId);
             analyzeReport = analyzerReportService.collectData(analyzeRequest);
         } catch (RuntimeException e) {
+            analyzeState.setFailReason(e.getMessage());
             analyzerStateTrackerService.fail(analyzeState);
-            e.printStackTrace();
         }
             analyzeState.setAnalyzeReport(analyzeReport);
             analyzerStateTrackerService.finish(analyzeState);

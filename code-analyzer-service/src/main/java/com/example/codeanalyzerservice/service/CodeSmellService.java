@@ -9,22 +9,21 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class CodeSmellService {
 
-    private final CodeSmellRepository bugEntityRepository;
+    private final CodeSmellRepository codeSmellRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     CodeSmell save(CodeSmell bug) {
-        return bugEntityRepository.save(bug);
+        return codeSmellRepository.save(bug);
     }
 
     CodeSmell getById(Long id) {
-        return bugEntityRepository
+        return codeSmellRepository
                 .findById(id)
                 .orElseThrow(() ->
-                     new ResourceNotFoundException("BugEntity with id " + id + " not found")
+                     new ResourceNotFoundException("CodeSmell with id " + id + " not found")
                 );
     }
 }

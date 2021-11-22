@@ -11,8 +11,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "bug_entity")
-public class BugEntity {
+@Table(name = "code_smell")
+public class CodeSmell {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +21,11 @@ public class BugEntity {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "file")
-    private String fileName;
-
     @ManyToOne
     @JoinColumn(name = "analyze_report_id")
     private AnalyzeReport analyzeReport;
 
-    public BugEntity(String message) {
+    public CodeSmell(String message) {
         this.message = message;
     }
 
@@ -36,8 +33,8 @@ public class BugEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BugEntity bugEntity = (BugEntity) o;
-        return Objects.equals(id, bugEntity.id);
+        CodeSmell codeSmell = (CodeSmell) o;
+        return Objects.equals(id, codeSmell.id);
     }
 
     @Override

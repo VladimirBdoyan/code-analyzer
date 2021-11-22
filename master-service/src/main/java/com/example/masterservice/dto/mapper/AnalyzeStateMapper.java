@@ -5,12 +5,14 @@ import com.example.masterservice.entity.AnalyzeState;
 
 public final class AnalyzeStateMapper {
 
-    private AnalyzeStateMapper(){}
+    private AnalyzeStateMapper(){
+    }
 
-    public static AnalyzeStateDTO mapToDTO(AnalyzeState analyzeState){
+    public static AnalyzeStateDTO mapToDTO(AnalyzeState analyzeState) {
         if (analyzeState==null){
             return null;
         }
+
         AnalyzeStateDTO rv=new AnalyzeStateDTO();
         rv.setAnalyzeReport(AnalyzeReportMapper.mapToDto(analyzeState.getAnalyzeReport()));
         rv.setFailReason(analyzeState.getFailReason());

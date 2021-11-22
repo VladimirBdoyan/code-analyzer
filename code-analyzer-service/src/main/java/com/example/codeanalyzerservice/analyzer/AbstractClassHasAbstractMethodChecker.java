@@ -6,14 +6,13 @@ import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class UtilityClassChecker implements Checker {
+public class AbstractClassHasAbstractMethodChecker implements Checker {
 
     private final ClassOrInterfaceDeclaration n;
     private final AnalyzeResult arg;
@@ -25,33 +24,38 @@ public class UtilityClassChecker implements Checker {
             return;
         }
 
+        NodeList<Modifier> modifiers = n.getModifiers();
+
+        if (!modifiers.contains(Modifier.abstractModifier())) {
+            return;
+        }
+
+        int coefficient = CodeSmellCategory.LOW.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
+
         List<MethodDeclaration> methodDeclarations = n.getMethods();
+
+        if (methodDeclarations.isEmpty()) {
+            CodeSmell codeSmell = new CodeSmell();
+            codeSmell.setCategory(CodeSmellCategory.LOW);
+            codeSmell.setMessage("Abstract class should has methods");
+            arg.getCodeSmells().add(codeSmell);
+            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
+            return;
+        }
+
+        boolean hasAbstractMethod = false;
         for (MethodDeclaration md : methodDeclarations) {
-            if (!md.getModifiers().contains(Modifier.staticModifier())) {
-                return;
+            if (md.getModifiers().contains(Modifier.abstractModifier())) {
+                hasAbstractMethod = true;
             }
         }
 
-        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
-        arg.setCurrentRate(arg.getCurrentRate() + 2 * coefficient);
-        arg.setMaxRate(arg.getMaxRate() + 2 * coefficient);
-
-        NodeList<Modifier> modifiers = n.getModifiers();
-
-        if (!modifiers.contains(Modifier.finalModifier())) {
+        if (!hasAbstractMethod) {
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.LOW);
-            codeSmell.setMessage("Util class must be final");
-            arg.getCodeSmells().add(codeSmell);
-            arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.MEDIUM.getCoefficient());
-        }
-
-        List<ConstructorDeclaration> cd = n.getConstructors();
-
-        if (cd.size() != 1 || !cd.get(0).getModifiers().contains(Modifier.privateModifier())) {
-            CodeSmell codeSmell = new CodeSmell();
-            codeSmell.setCategory(CodeSmellCategory.LOW);
-            codeSmell.setMessage("Util class mast be have unique private constructor");
+            codeSmell.setMessage("Abstract class should has abstract methods");
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }

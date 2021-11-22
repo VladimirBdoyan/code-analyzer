@@ -16,5 +16,5 @@ public class AnalyzeReportDTO {
     private Integer conversationCount;
     private Integer pullRequestCommitCommentCount;
     private Integer codingRate;
-    private List<String> bugs;
+    private List<String> codeSmells;
 }

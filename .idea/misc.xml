@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/authentication-service" />
     <file type="web" url="file://$PROJECT_DIR$/code-analyzer-service" />
     <file type="web" url="file://$PROJECT_DIR$/git-access-service" />
+    <file type="web" url="file://$PROJECT_DIR$/master-service" />
     <file type="web" url="file://$PROJECT_DIR$/statistics-service" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />

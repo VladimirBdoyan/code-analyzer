@@ -8,11 +8,11 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Table(name = "organization")
 @Setter
 @Getter
 @NoArgsConstructor
+@Entity
+@Table(name = "organization")
 public class Organization {
 
     @Id

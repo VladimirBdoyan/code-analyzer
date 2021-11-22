@@ -5,16 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
-@Table(name = "master_service_report")
 @Setter
 @Getter
 @NoArgsConstructor
+@Entity
+@Table(name = "analyze_report")
 public class AnalyzeReport {
 
     @Id
@@ -25,19 +23,19 @@ public class AnalyzeReport {
     @JoinColumn(name = "developer_id")
     private Developer developer;
 
-    @Column(name = "developerCommitDensity")
+    @Column(name = "developer_commit_density")
     private double developerCommitDensity;
 
-    @Column(name = "pullRequestDensity")
+    @Column(name = "pull_request_density")
     private double pullRequestDensity;
 
-    @Column(name = "pullRequestCommitDensity")
+    @Column(name = "pull_request_commit_density")
     private double pullRequestCommitDensity;
 
-    @Column(name = "conversationCount")
+    @Column(name = "conversation_count")
     private int conversationCount;
 
-    @Column(name = "pullRequestCommitCommentCount")
+    @Column(name = "pull_request_commit_comment_count")
     private int pullRequestCommitCommentCount;
 
     @Column(name = "coding_rate")
@@ -45,7 +43,7 @@ public class AnalyzeReport {
 
     @OneToMany
     @JoinColumn(name = "analyze_report_id")
-    private List<BugEntity> bugs;
+    private List<CodeSmell> codeSmells;
 
     @Override
     public boolean equals(Object o) {

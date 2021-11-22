@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class HashCodeImplementationChecker implements Checker {
+public class EntityHashCodeImplementationChecker implements Checker {
 
     private final MethodDeclaration md;
     private final AnalyzeResult arg;

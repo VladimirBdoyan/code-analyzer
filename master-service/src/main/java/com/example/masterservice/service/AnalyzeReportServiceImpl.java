@@ -2,10 +2,11 @@ package com.example.masterservice.service;
 
 import com.example.masterservice.dto.AnalyzeReportDTO;
 import com.example.masterservice.dto.AnalyzeRequestDTO;
-import com.example.masterservice.dto.StatisticsReportDto;
-import com.example.masterservice.dto.codeAnalyzerResponse.AnalyzeServiceReportDTO;
+import com.example.masterservice.dto.StatisticsReportDTO;
+import com.example.masterservice.dto.CodeAnalyzeReportDTO;
 import com.example.masterservice.dto.mapper.AnalyzeReportMapper;
 import com.example.masterservice.entity.AnalyzeReport;
+import com.example.masterservice.exception.ResourceNotFoundException;
 import com.example.masterservice.repository.AnalyzeReportRepository;
 import com.example.masterservice.util.RequestURL;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,20 @@ public class AnalyzeReportServiceImpl implements AnalyzeReportService {
     public AnalyzeReport collectData(AnalyzeRequestDTO analyzeRequest) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
-        StatisticsReportDto statisticsReport = restTemplate.postForEntity(RequestURL.STATISTICSURLPATH, analyzeRequest, StatisticsReportDto.class).getBody();
-        AnalyzeServiceReportDTO codeAnalyzerReport = restTemplate.postForEntity(RequestURL.CODEANALYZERPATH, analyzeRequest, AnalyzeServiceReportDTO.class).getBody();
+        StatisticsReportDTO statisticsReport = restTemplate
+                .postForEntity(RequestURL.STATISTICS_URL_PATH, analyzeRequest, StatisticsReportDTO.class).getBody();
+        CodeAnalyzeReportDTO codeAnalyzerReport = restTemplate
+                .postForEntity(RequestURL.CODE_ANALYZER_PATH, analyzeRequest, CodeAnalyzeReportDTO.class).getBody();
 
-        assert codeAnalyzerReport != null;
-        assert statisticsReport != null;
-        AnalyzeReport analyzeReport = AnalyzeReportMapper.mapToEntity(codeAnalyzerReport, statisticsReport);
+        if (statisticsReport == null || codeAnalyzerReport == null) {
+            throw new ResourceNotFoundException("Account for user" + analyzeRequest.getLogin() + " not found");
+        }
+
+        AnalyzeReport analyzeReport =
+                AnalyzeReportMapper.mapToEntity(codeAnalyzerReport, statisticsReport);
 
         analyzeReport = analyzeReportRepository.save(analyzeReport);
         AnalyzeReportDTO reportDTO = AnalyzeReportMapper.mapToDto(analyzeReport);
-//create report----------------------------------------------
         return analyzeReport;
     }
 }

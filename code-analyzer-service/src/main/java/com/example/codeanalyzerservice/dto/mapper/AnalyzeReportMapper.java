@@ -4,10 +4,13 @@ import com.example.codeanalyzerservice.dto.AnalyzeReportDTO;
 import com.example.codeanalyzerservice.entity.AnalyzeReport;
 
 public final class AnalyzeReportMapper {
-    private AnalyzeReportMapper(){}
 
-    public static AnalyzeReportDTO mapToDTO(AnalyzeReport analyzeReport){
-        if (analyzeReport==null){
+    private AnalyzeReportMapper() {
+
+    }
+
+    public static AnalyzeReportDTO mapToDTO(AnalyzeReport analyzeReport) {
+        if (analyzeReport == null){
             return null;
         }
 

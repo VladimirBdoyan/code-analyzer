@@ -25,7 +25,7 @@ public class Visitor extends VoidVisitorAdapter<AnalyzeResult> {
         new MethodNameChecker(n, arg).check();
         new OptionalAsMethodArgumentChecker(n, arg).check();
         new ResourceClosedChecker(n, arg).check();
-        new HashCodeImplementationChecker(n,arg).check();
+        new EntityHashCodeImplementationChecker(n,arg).check();
         new UnusedVariableChecker(n,arg).check();
     }
 
@@ -33,7 +33,8 @@ public class Visitor extends VoidVisitorAdapter<AnalyzeResult> {
     public void visit(ClassOrInterfaceDeclaration n, AnalyzeResult arg) {
         super.visit(n, arg);
         new ClassNameChecker(n, arg).check();
-        new AbstractClassChecker(n,arg).check();
+        new AbstractClassHasAbstractMethodChecker(n,arg).check();
+        new AbstractClassHasFieldsChecker(n, arg).check();
         new UtilityClassChecker(n,arg).check();
     }
 

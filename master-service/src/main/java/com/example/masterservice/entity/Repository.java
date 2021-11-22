@@ -7,11 +7,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "repository")
 @Setter
 @Getter
 @NoArgsConstructor
+@Entity
+@Table(name = "repository")
 public class Repository {
 
     @Id
