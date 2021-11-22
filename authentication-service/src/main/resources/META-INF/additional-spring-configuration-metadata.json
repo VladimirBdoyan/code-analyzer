@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "secret",
+      "type": "java.lang.String",
+      "description": "Description for secret."
+    },
+    {
+      "name": "EXPIRATION_TIME",
+      "type": "java.lang.String",
+      "description": "Description for EXPIRATION_TIME."
+    },
+    {
+      "name": "TOKEN_PREFIX",
+      "type": "java.lang.String",
+      "description": "Description for TOKEN_PREFIX."
+    }
+  ] }
