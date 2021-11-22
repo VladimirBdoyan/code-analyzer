@@ -8,7 +8,6 @@ import com.example.codeanalyzerservice.dto.mapper.AnalyzeReportMapper;
 import com.example.codeanalyzerservice.entity.AnalyzeReport;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.exception.RepositoriesNotFoundException;
-import com.example.codeanalyzerservice.util.RequestURL;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
@@ -41,7 +40,7 @@ public class AnalyzeService {
 //        ResponseEntity<List<URL>> response = restTemplate.exchange("http://localhost:8080/api/v1/git-access/URL", HttpMethod.POST, null,
 //                new ParameterizedTypeReference<List<URL>>() {
 //                }, analyzeRequest);
-        GitAccessResponseDTO response = restTemplate.postForObject(RequestURL.GITACCESSURL,analyzeRequest,GitAccessResponseDTO.class);
+        GitAccessResponseDTO response = restTemplate.postForObject("http://localhost:8083/api/v1/git-access/URL",analyzeRequest,GitAccessResponseDTO.class);
 
 
 //        if (response.getStatusCode().is4xxClientError()) {

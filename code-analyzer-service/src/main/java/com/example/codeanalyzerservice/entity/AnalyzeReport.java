@@ -14,7 +14,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "analyze_report")
+@Table(name = "analyze_report", schema = "code_analyzer")
 public class AnalyzeReport {
 
     @Id

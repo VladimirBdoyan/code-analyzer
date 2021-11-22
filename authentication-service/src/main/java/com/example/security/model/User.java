@@ -11,6 +11,8 @@ import java.util.Set;
 @Table(name = "users", schema = "authentication")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_entity_seq")
+    @SequenceGenerator(name = "user_entity_seq", sequenceName = "user_entity_seq", allocationSize = 1)
     private String username;
 
     @Column(name = "enabled")

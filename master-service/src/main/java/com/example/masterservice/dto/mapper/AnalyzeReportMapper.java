@@ -35,16 +35,28 @@ public final class AnalyzeReportMapper {
     }
 
     public static AnalyzeReport mapToEntity(AnalyzeServiceReportDTO codeDTO, StatisticsReportDto statisticsDto) {
+//        if(codeDTO == null || statisticsDto == null){
+//            return null;
+//        }
         AnalyzeReport rv = new AnalyzeReport();
         rv.setDeveloper(new Developer(statisticsDto.getUserName()));
         rv.setDeveloperCommitDensity(statisticsDto.getCommitDensityReport().getDensity());
-        rv.setPullRequestDensity(statisticsDto.getPullRequestReport().getPullRequestDensity());
-        rv.setPullRequestCommitDensity(statisticsDto.getPullRequestReport().getPullRequestCommitDensity());
-        rv.setConversationCount(statisticsDto.getPullRequestReport().getConversationCount());
-        rv.setPullRequestCommitCommentCount(statisticsDto.getPullRequestReport().getPullRequestCommitCommentCount());
-        rv.setCodingRate(codeDTO.getAnalyzeResults().getCurrentRate() / codeDTO.getAnalyzeResults().getMaxRate() * 100);
+        if (statisticsDto.getPullRequestReport() == null) {
+            rv.setPullRequestDensity(0.0);
+            rv.setPullRequestCommitDensity(0.0);
+            rv.setConversationCount(0);
+            rv.setPullRequestCommitCommentCount(0);
+        } else {
+            rv.setPullRequestDensity(statisticsDto.getPullRequestReport().getPullRequestDensity());
+            rv.setPullRequestDensity(statisticsDto.getPullRequestReport().getPullRequestDensity());
+            rv.setPullRequestCommitDensity(statisticsDto.getPullRequestReport().getPullRequestCommitDensity());
+            rv.setConversationCount(statisticsDto.getPullRequestReport().getConversationCount());
+            rv.setPullRequestCommitCommentCount(statisticsDto.getPullRequestReport().getPullRequestCommitCommentCount());
+        }
+
+        rv.setCodingRate(100 * codeDTO.getAnalyzeResults().getCurrentRate() / codeDTO.getAnalyzeResults().getMaxRate());
         List<BugEntity> bugEntityList = new ArrayList<>();
-        for(CodeSmellDTO codeSmellDTO:codeDTO.getAnalyzeResults().getCodeSmells()){
+        for (CodeSmellDTO codeSmellDTO : codeDTO.getAnalyzeResults().getCodeSmells()) {
             bugEntityList.add(new BugEntity(codeSmellDTO.getMessage()));
         }
         rv.setBugs(bugEntityList);

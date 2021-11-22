@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "master_service_report")
+@Table(name = "master_service_report", schema = "master")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class AnalyzeReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "developer_id")
     private Developer developer;
 
@@ -43,8 +43,7 @@ public class AnalyzeReport {
     @Column(name = "coding_rate")
     private int codingRate;
 
-    @OneToMany
-    @JoinColumn(name = "analyze_report_id")
+    @OneToMany(mappedBy = "analyzeReport")
     private List<BugEntity> bugs;
 
     @Override

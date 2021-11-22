@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "githubuser")
+@Table(name = "githubuser", schema = "statistics")
 public class GitUser {
 
     @Id

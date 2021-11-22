@@ -1,9 +1,9 @@
 package com.company.statisticsservice.dto.statisticsResponse;
 
 public class CommitDensityDto {
-    private double density;
+    private Double density;
 
-    public double getDensity() {
+    public Double getDensity() {
         return density;
     }
 

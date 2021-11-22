@@ -13,10 +13,10 @@ public class Visitor extends VoidVisitorAdapter<AnalyzeResult> {
     @Override
     public void visit(CompilationUnit n, AnalyzeResult arg) {
         super.visit(n, arg);
-        new DefaultPackageUsedChecker(n, arg).check();
-        new UnusedImportChecker(n, arg).check();
-        new CollectionInterfaceUsedChecker(n, arg).check();
-        new OneLineVariablesDeclarationChecker(n, arg).check();
+//        new DefaultPackageUsedChecker(n, arg).check();
+//        new UnusedImportChecker(n, arg).check();
+//        new CollectionInterfaceUsedChecker(n, arg).check();
+//        new OneLineVariablesDeclarationChecker(n, arg).check();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Visitor extends VoidVisitorAdapter<AnalyzeResult> {
         super.visit(n, arg);
         new MethodNameChecker(n, arg).check();
         new OptionalAsMethodArgumentChecker(n, arg).check();
-        new ResourceClosedChecker(n, arg).check();
+//        new ResourceClosedChecker(n, arg).check();
         new HashCodeImplementationChecker(n,arg).check();
         new UnusedVariableChecker(n,arg).check();
     }

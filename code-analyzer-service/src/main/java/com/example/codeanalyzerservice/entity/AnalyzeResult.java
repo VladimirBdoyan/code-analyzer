@@ -13,7 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "analyze_result")
+@Table(name = "analyze_result", schema = "code_analyzer")
 public class AnalyzeResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class AnalyzeResult {
     @Column(name = "max_rate")
     private int maxRate;
 
-    @OneToMany(mappedBy = "analyzeResult")
+    @OneToMany(mappedBy = "analyzeResult", cascade = CascadeType.ALL)
     List<CodeSmell> codeSmells=new ArrayList<>();
 
     @OneToOne

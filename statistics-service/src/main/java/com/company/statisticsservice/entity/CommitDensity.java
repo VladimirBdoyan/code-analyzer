@@ -6,7 +6,7 @@ import java.util.Date;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "commit_density_report")
+@Table(name = "commit_density_report", schema = "statistics")
 public class CommitDensity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "commit_id_seq")

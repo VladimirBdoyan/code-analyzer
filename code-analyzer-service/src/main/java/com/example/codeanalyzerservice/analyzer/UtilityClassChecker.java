@@ -31,10 +31,11 @@ public class UtilityClassChecker implements Checker {
                 return;
             }
         }
-
         int coefficient = CodeSmellCategory.HIGH.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);
+
+
 
         NodeList<Modifier> modifiers = clazz.getModifiers();
 

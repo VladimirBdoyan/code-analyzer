@@ -3,8 +3,8 @@ package com.example.masterservice.dto;
 public class PullRequestReportDto {
     private int ConversationCount;
     private int pullRequestCommitCommentCount;
-    private double pullRequestDensity;
-    private double pullRequestCommitDensity;
+    private Double pullRequestDensity;
+    private Double pullRequestCommitDensity;
 
     public int getConversationCount() {
         return ConversationCount;
@@ -22,19 +22,19 @@ public class PullRequestReportDto {
         this.pullRequestCommitCommentCount = pullRequestCommitCommentCount;
     }
 
-    public double getPullRequestDensity() {
+    public Double getPullRequestDensity() {
         return pullRequestDensity;
     }
 
-    public void setPullRequestDensity(double pullRequestDensity) {
+    public void setPullRequestDensity(Double pullRequestDensity) {
         this.pullRequestDensity = pullRequestDensity;
     }
 
-    public double getPullRequestCommitDensity() {
+    public Double getPullRequestCommitDensity() {
         return pullRequestCommitDensity;
     }
 
-    public void setPullRequestCommitDensity(double pullRequestCommitDensity) {
+    public void setPullRequestCommitDensity(Double pullRequestCommitDensity) {
         this.pullRequestCommitDensity = pullRequestCommitDensity;
     }
 }

@@ -11,7 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "bug_entity")
+@Table(name = "bug_entity", schema = "master")
 public class BugEntity {
 
     @Id
@@ -24,8 +24,8 @@ public class BugEntity {
     @Column(name = "file")
     private String fileName;
 
-    @ManyToOne
-    @JoinColumn(name = "analyze_report_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "analyze_report_id" )
     private AnalyzeReport analyzeReport;
 
     public BugEntity(String message) {

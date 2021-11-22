@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "developer")
+@Table(name = "developer", schema = "master")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Developer {
     @Column(name = "username")
     private String username;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 

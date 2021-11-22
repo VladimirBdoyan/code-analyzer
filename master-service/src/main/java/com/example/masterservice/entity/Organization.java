@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "organization", schema = "master")
 @Setter
 @Getter
 @NoArgsConstructor

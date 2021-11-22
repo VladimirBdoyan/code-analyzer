@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "githubrepository")
+@Table(name = "githubrepository", schema = "statistics")
 public class GitRepository {
 
     @Id

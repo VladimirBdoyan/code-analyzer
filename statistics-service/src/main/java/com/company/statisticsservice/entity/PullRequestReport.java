@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "pullrequest_report")
+@Table(name = "pullrequest_report", schema = "statistics")
 public class PullRequestReport {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pullrequest_id_seq")
