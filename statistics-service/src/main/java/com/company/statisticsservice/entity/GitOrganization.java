@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "organization", schema = "statistics")
 public class GitOrganization {
 
     @Id

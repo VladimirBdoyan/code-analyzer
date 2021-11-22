@@ -7,10 +7,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties
 //@EntityScan(basePackages = {"com.example.security.model"})
-public class SecurityApplication {
+public class AuthenticationServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SecurityApplication.class, args);
+		SpringApplication.run(AuthenticationServiceApplication.class, args);
 	}
 
 }

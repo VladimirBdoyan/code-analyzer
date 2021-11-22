@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.UUID;
 
+
 @RestController
 @RequestMapping("/api/v1/analyze")
 @RequiredArgsConstructor

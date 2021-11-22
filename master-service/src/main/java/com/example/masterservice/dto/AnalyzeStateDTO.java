@@ -10,7 +10,6 @@ import java.util.UUID;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnalyzeStateDTO {
-
     private UUID jobId;
     private ReportStatus status;
     private Date startDate;

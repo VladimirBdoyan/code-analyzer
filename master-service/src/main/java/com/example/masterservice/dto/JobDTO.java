@@ -6,6 +6,6 @@ import java.util.UUID;
 
 @Data
 public class JobDTO {
-    private UUID jobId;
-    private String message = "In progress";
+    private final UUID jobId;
+    private final String message;
 }

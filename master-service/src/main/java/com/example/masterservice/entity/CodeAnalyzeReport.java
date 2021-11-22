@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "code_analyze_report")
+@Table(name = "code_analyze_report", schema = "master")
 public class CodeAnalyzeReport {
 
     @Id

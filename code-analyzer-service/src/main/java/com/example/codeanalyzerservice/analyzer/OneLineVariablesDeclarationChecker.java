@@ -17,9 +17,9 @@ public class OneLineVariablesDeclarationChecker implements Checker {
 
     @Override
     public void check() {
-        int coefficient= CodeSmellCategory.LOW.getCoefficient();
-        arg.setCurrentRate(arg.getCurrentRate()+coefficient);
-        arg.setMaxRate(arg.getMaxRate()+coefficient);
+        int coefficient = CodeSmellCategory.LOW.getCoefficient();
+        arg.setCurrentRate(arg.getCurrentRate() + coefficient);
+        arg.setMaxRate(arg.getMaxRate() + coefficient);
 
         n.findAll(VariableDeclarationExpr.class).forEach(variableDeclarationExpr -> {
             if (variableDeclarationExpr.getVariables().size() > 1) {
@@ -27,7 +27,7 @@ public class OneLineVariablesDeclarationChecker implements Checker {
                 codeSmell.setCategory(CodeSmellCategory.LOW);
                 codeSmell.setMessage("More than two variables should not be declared in one line");
                 arg.getCodeSmells().add(codeSmell);
-                arg.setCurrentRate(arg.getCurrentRate()-coefficient);
+                arg.setCurrentRate(arg.getCurrentRate() - coefficient);
             }
         });
 
@@ -37,7 +37,7 @@ public class OneLineVariablesDeclarationChecker implements Checker {
                 codeSmell.setCategory(CodeSmellCategory.LOW);
                 codeSmell.setMessage("More than two variables should not be declared in one line");
                 arg.getCodeSmells().add(codeSmell);
-                arg.setCurrentRate(arg.getCurrentRate()-coefficient);
+                arg.setCurrentRate(arg.getCurrentRate() - coefficient);
             }
         });
     }
