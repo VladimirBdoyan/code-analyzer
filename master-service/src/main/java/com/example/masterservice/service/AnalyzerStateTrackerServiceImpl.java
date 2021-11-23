@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional
 @RequiredArgsConstructor
 public class AnalyzerStateTrackerServiceImpl implements AnalyzerStateTrackerService {
 
