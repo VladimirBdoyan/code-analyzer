@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class AnalyzeResultDTO {
     private Long id;
-    private int currentRate;
-    private int maxRate;
-    List<CodeSmellDTO> codeSmells;
+    private Integer currentRate;
+    private Integer maxRate;
+    private List<CodeSmellDTO> codeSmells;
 }

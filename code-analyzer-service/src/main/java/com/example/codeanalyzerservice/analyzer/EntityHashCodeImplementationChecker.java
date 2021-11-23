@@ -1,7 +1,7 @@
 package com.example.codeanalyzerservice.analyzer;
 
 
-import com.example.codeanalyzerservice.constants.JavaKeyWords;
+import com.example.codeanalyzerservice.constant.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -13,26 +13,22 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
-@RequiredArgsConstructor
-public class EntityHashCodeImplementationChecker implements Checker {
+@UtilityClass
+public final class EntityHashCodeImplementationChecker {
 
-    private final MethodDeclaration md;
-    private final AnalyzeResult arg;
-
-
-    @Override
-    public void check() {
-        if (!md.getBody().isPresent()) {
+    public static void check(MethodDeclaration n, AnalyzeResult arg) {
+        if (!n.getBody().isPresent()) {
             return;
         }
 
-        if (!md.getNameAsString().equals(JavaKeyWords.HASH_CODE)) {
+        if (!n.getNameAsString().equals(JavaKeyWords.HASH_CODE)) {
             return;
         }
 
@@ -40,7 +36,7 @@ public class EntityHashCodeImplementationChecker implements Checker {
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);
 
-        BlockStmt body = md.getBody().get();
+        BlockStmt body = n.getBody().get();
         List<ReturnStmt> returnStatements = body.findAll(ReturnStmt.class);
 
         if (returnStatements.size() > 1) {
@@ -48,15 +44,16 @@ public class EntityHashCodeImplementationChecker implements Checker {
             arg.setMaxRate(arg.getMaxRate() + coefficient);
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.MEDIUM);
-            codeSmell.setMessage("Bad score: multiple return statements in hashCodeMethod");
+            codeSmell.setMessage("Multiple return statements should not be in hashCode method");
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.MEDIUM.getCoefficient());
         }
 
         ReturnStmt returnStmt = returnStatements.get(0);
 
-        List<FieldDeclaration> fields = md.getParentNode()
-                .get().findAll(FieldDeclaration.class,
+        List<FieldDeclaration> fields = n.getParentNode()
+                .orElseThrow(NoSuchElementException::new)
+                .findAll(FieldDeclaration.class,
                         (fieldDeclaration -> fieldDeclaration.getAnnotations().stream()
                                 .map(AnnotationExpr::getNameAsString).anyMatch((s) -> s.equals("Id"))
                         ));
@@ -69,7 +66,7 @@ public class EntityHashCodeImplementationChecker implements Checker {
             }
         }
 
-        List<FieldDeclaration> unnecessaryFields = md.getParentNode()
+        List<FieldDeclaration> unnecessaryFields = n.getParentNode()
                 .get().findAll(FieldDeclaration.class,
                         (fieldDeclaration -> fieldDeclaration.getAnnotations().stream()
                                 .map(AnnotationExpr::getNameAsString).anyMatch((s) -> !s.equals("Id"))
@@ -83,7 +80,9 @@ public class EntityHashCodeImplementationChecker implements Checker {
             }
         }
 
-        Expression expression = returnStmt.getExpression().get();
+        Expression expression = returnStmt
+                .getExpression()
+                .orElseThrow(NoSuchElementException::new);
 
         List<SimpleName> extraFields = expression.findAll(SimpleName.class,
                 (sn) -> (!pkFields.contains(sn.asString()) && unFields.contains(sn.asString())));
@@ -92,7 +91,7 @@ public class EntityHashCodeImplementationChecker implements Checker {
         if (extraFields.size() > 0) {
             CodeSmell codeSmell = new CodeSmell();
             codeSmell.setCategory(CodeSmellCategory.LOW);
-            codeSmell.setMessage("Bad code: Only @Id annotated fields must be in hashCode()");
+            codeSmell.setMessage("Only @Id annotated fields must be in hashCode method");
             arg.getCodeSmells().add(codeSmell);
             arg.setCurrentRate(arg.getCurrentRate() - CodeSmellCategory.LOW.getCoefficient());
         }

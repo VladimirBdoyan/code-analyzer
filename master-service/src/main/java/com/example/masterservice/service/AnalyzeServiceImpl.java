@@ -3,7 +3,6 @@ package com.example.masterservice.service;
 import com.example.masterservice.dto.AnalyzeRequestDTO;
 import com.example.masterservice.entity.AnalyzeReport;
 import com.example.masterservice.entity.AnalyzeState;
-import com.example.masterservice.repository.AnalyzeReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -13,10 +12,10 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AnalyzerServiceImpl implements AnalyzeService {
+public class AnalyzeServiceImpl implements AnalyzeService {
+
     private final AnalyzeReportService analyzerReportService;
     private final AnalyzerStateTrackerService analyzerStateTrackerService;
-    private final AnalyzeReportRepository analyzeReportRepository;
 
     @Async
     @Transactional

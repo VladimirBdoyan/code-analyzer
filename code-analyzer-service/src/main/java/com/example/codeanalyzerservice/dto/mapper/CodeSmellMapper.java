@@ -2,27 +2,26 @@ package com.example.codeanalyzerservice.dto.mapper;
 
 import com.example.codeanalyzerservice.dto.CodeSmellDTO;
 import com.example.codeanalyzerservice.entity.CodeSmell;
+import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@UtilityClass
 public final class CodeSmellMapper {
 
-    private CodeSmellMapper() {
-
-    }
-
-    public static CodeSmellDTO mapToDTO(CodeSmell codeSmell){
-        if (codeSmell==null){
+    public static CodeSmellDTO mapToDTO(CodeSmell entity){
+        if (entity == null){
             return null;
         }
 
-        CodeSmellDTO codeSmellDTO=new CodeSmellDTO();
-        codeSmellDTO.setMessage(codeSmell.getMessage());
-        codeSmellDTO.setCategory(codeSmell.getCategory());
-        codeSmellDTO.setId(codeSmell.getId());
-        return codeSmellDTO;
+        CodeSmellDTO dto = new CodeSmellDTO();
+        dto.setId(entity.getId());
+        dto.setMessage(entity.getMessage());
+        dto.setCategory(entity.getCategory());
+
+        return dto;
     }
 
     public static List<CodeSmellDTO> mapToListDTO(List<CodeSmell> codeSmells){

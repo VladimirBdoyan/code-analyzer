@@ -13,34 +13,34 @@ public class Visitor extends VoidVisitorAdapter<AnalyzeResult> {
     @Override
     public void visit(CompilationUnit n, AnalyzeResult arg) {
         super.visit(n, arg);
-        new DefaultPackageUsedChecker(n, arg).check();
-        new UnusedImportChecker(n, arg).check();
-        new CollectionInterfaceUsedChecker(n, arg).check();
-        new OneLineVariablesDeclarationChecker(n, arg).check();
+        DefaultPackageUsedChecker.check(n, arg);
+        UnusedImportChecker.check(n, arg);
+        CollectionInterfaceUsedChecker.check(n, arg);
+        OneLineVariablesDeclarationChecker.check(n, arg);
     }
 
     @Override
     public void visit(MethodDeclaration n, AnalyzeResult arg) {
         super.visit(n, arg);
-        new MethodNameChecker(n, arg).check();
-        new OptionalAsMethodArgumentChecker(n, arg).check();
-        new ResourceClosedChecker(n, arg).check();
-        new EntityHashCodeImplementationChecker(n,arg).check();
-        new UnusedVariableChecker(n,arg).check();
+        MethodNameChecker.check(n, arg);
+        OptionalAsMethodArgumentChecker.check(n, arg);
+        ResourceClosedChecker.check(n, arg);
+        EntityHashCodeImplementationChecker.check(n, arg);
+        UnusedVariableChecker.check(n, arg);
     }
 
     @Override
     public void visit(ClassOrInterfaceDeclaration n, AnalyzeResult arg) {
         super.visit(n, arg);
-        new ClassNameChecker(n, arg).check();
-        new AbstractClassHasAbstractMethodChecker(n,arg).check();
-        new AbstractClassHasFieldsChecker(n, arg).check();
-        new UtilityClassChecker(n,arg).check();
+        ClassNameChecker.check(n, arg);
+        AbstractClassHasAbstractMethodChecker.check(n, arg);
+        AbstractClassHasFieldsChecker.check(n, arg);
+        UtilityClassChecker.check(n, arg);
     }
 
     @Override
     public void visit(CatchClause n, AnalyzeResult arg) {
         super.visit(n, arg);
-        new NullPointerExceptionCaughtChecker(n, arg).check();
+        NullPointerExceptionCaughtChecker.check(n, arg);
     }
 }

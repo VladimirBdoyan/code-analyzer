@@ -17,8 +17,7 @@ public class CodeSmell {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Column(name = "id")
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "category")

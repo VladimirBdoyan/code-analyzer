@@ -1,6 +1,7 @@
 package com.example.masterservice.dto;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 

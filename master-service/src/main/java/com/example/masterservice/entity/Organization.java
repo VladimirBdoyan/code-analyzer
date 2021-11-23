@@ -12,11 +12,12 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "organization")
+@Table(name = "organization", schema = "master")
 public class Organization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "name")

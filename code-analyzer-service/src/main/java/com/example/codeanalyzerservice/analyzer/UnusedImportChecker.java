@@ -6,19 +6,15 @@ import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.type.Type;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@RequiredArgsConstructor
-public class UnusedImportChecker implements Checker {
+@UtilityClass
+public final class UnusedImportChecker {
 
-    private final CompilationUnit n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(CompilationUnit n, AnalyzeResult arg) {
         int coefficient= CodeSmellCategory.LOW.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate()+coefficient);
         arg.setMaxRate(arg.getMaxRate()+coefficient);

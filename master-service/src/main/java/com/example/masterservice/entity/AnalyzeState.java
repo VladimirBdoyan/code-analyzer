@@ -14,10 +14,11 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "analyze_report_status")
+@Table(name = "analyze_report_status", schema = "master")
 public class AnalyzeState {
 
     @Id
+    @Column(name = "job_id", nullable = false)
     private UUID jobId;
 
     @Enumerated(EnumType.STRING)

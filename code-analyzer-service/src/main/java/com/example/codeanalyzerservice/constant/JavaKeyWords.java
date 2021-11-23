@@ -1,11 +1,9 @@
-package com.example.codeanalyzerservice.constants;
+package com.example.codeanalyzerservice.constant;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public final class JavaKeyWords {
-
-    private JavaKeyWords() {
-
-    }
-
     public static final String COLLECTION = "java.util.Collection";
     public static final String CLOSEABLE = "java.io.Closeable";
     public static final String OPTIONAL = "Optional";

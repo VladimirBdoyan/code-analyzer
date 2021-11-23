@@ -7,18 +7,14 @@ import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-public class AbstractClassHasFieldsChecker implements Checker {
+@UtilityClass
+public final class AbstractClassHasFieldsChecker {
 
-    private final ClassOrInterfaceDeclaration n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(ClassOrInterfaceDeclaration n, AnalyzeResult arg) {
         if (n.isInterface()) {
             return;
         }

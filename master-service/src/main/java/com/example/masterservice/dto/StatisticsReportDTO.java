@@ -11,9 +11,8 @@ public class StatisticsReportDTO {
     private String login;
     private String userName;
     private String repoName;
-    private double density;
+    private Double commitDensity;
+    private PullRequestReportDTO pullRequestReport;
     private Date startDate;
     private Date endDate;
-    private CommitDensityDTO commitDensityReport;
-    private PullRequestReportDTO pullRequestReport;
 }

@@ -2,23 +2,21 @@ package com.example.codeanalyzerservice.dto.mapper;
 
 import com.example.codeanalyzerservice.dto.AnalyzeResultDTO;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public final class AnalyzeResultMapper {
 
-    private AnalyzeResultMapper() {
-
-    }
-
-    public static AnalyzeResultDTO mapToDTO(AnalyzeResult result) {
-        if (result==null){
+    public static AnalyzeResultDTO mapToDTO(AnalyzeResult entity) {
+        if (entity == null){
             return null;
         }
 
-        AnalyzeResultDTO rv = new AnalyzeResultDTO();
-        rv.setId(result.getId());
-        rv.setMaxRate(result.getMaxRate());
-        rv.setCurrentRate(result.getCurrentRate());
-        rv.setCodeSmells(CodeSmellMapper.mapToListDTO(result.getCodeSmells()));
-        return rv;
+        AnalyzeResultDTO dto  = new AnalyzeResultDTO();
+        dto.setId(entity.getId());
+        dto.setMaxRate(dto.getMaxRate());
+        dto.setCurrentRate(dto.getCurrentRate());
+        dto.setCodeSmells(CodeSmellMapper.mapToListDTO(entity.getCodeSmells()));
+        return dto;
     }
 }

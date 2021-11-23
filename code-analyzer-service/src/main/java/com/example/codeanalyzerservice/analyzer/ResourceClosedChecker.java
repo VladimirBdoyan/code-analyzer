@@ -1,6 +1,6 @@
 package com.example.codeanalyzerservice.analyzer;
 
-import com.example.codeanalyzerservice.constants.JavaKeyWords;
+import com.example.codeanalyzerservice.constant.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
@@ -9,20 +9,16 @@ import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 import com.github.javaparser.resolution.types.ResolvedReferenceType;
 import com.github.javaparser.resolution.types.ResolvedType;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@RequiredArgsConstructor
-public class ResourceClosedChecker implements Checker {
+@UtilityClass
+public final class ResourceClosedChecker {
 
-    private final MethodDeclaration n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(MethodDeclaration n, AnalyzeResult arg) {
         if (!n.getBody().isPresent()) {
             return;
         }

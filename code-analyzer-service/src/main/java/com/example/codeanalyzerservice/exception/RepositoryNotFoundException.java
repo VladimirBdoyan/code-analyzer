@@ -1,6 +1,6 @@
 package com.example.codeanalyzerservice.exception;
 
-public class RepositoryNotFoundException extends AppRuntimeException {
+public class RepositoryNotFoundException extends CodeAnalyzerRuntimeException {
 
     public RepositoryNotFoundException(String message) {
         super(message);

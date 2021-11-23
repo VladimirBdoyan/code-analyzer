@@ -2,24 +2,24 @@ package com.example.masterservice.dto.mapper;
 
 import com.example.masterservice.dto.AnalyzeStateDTO;
 import com.example.masterservice.entity.AnalyzeState;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public final class AnalyzeStateMapper {
 
-    private AnalyzeStateMapper(){
-    }
-
-    public static AnalyzeStateDTO mapToDTO(AnalyzeState analyzeState) {
-        if (analyzeState==null){
+    public static AnalyzeStateDTO mapToDTO(AnalyzeState entity) {
+        if (entity == null){
             return null;
         }
 
         AnalyzeStateDTO rv=new AnalyzeStateDTO();
-        rv.setAnalyzeReport(AnalyzeReportMapper.mapToDto(analyzeState.getAnalyzeReport()));
-        rv.setFailReason(analyzeState.getFailReason());
-        rv.setStatus(analyzeState.getStatus());
-        rv.setStartDate(analyzeState.getStartDate());
-        rv.setFinishDate(analyzeState.getFinishDate());
-        rv.setJobId(analyzeState.getJobId());
+        rv.setJobId(entity.getJobId());
+        rv.setAnalyzeReport(AnalyzeReportMapper.mapToDto(entity.getAnalyzeReport()));
+        rv.setFailReason(entity.getFailReason());
+        rv.setStatus(entity.getStatus());
+        rv.setStartDate(entity.getStartDate());
+        rv.setFinishDate(entity.getFinishDate());
+
         return rv;
     }
 }

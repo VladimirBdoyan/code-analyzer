@@ -8,7 +8,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnalyzeReportDTO {
     private Long id;
-    private String developerName;
+    private String developer;
     private Double commitDensity;
     private Double developerCommitDensity;
     private Double pullRequestDensity;

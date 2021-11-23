@@ -8,15 +8,16 @@ import java.util.Date;
 @Data
 public class AnalyzeRequestDTO {
 
-    @NotNull
-    private String login;
+    @NotNull(message = "Username is mandatory")
+    private String username;
 
     private String organization;
+
     private String repoName;
 
-    @NotNull
+    @NotNull(message = "Analyze start_date(from) is mandatory")
     private Date startDate;
 
-    @NotNull
+    @NotNull(message = "Analyze end_date(to) is mandatory")
     private Date endDate;
 }

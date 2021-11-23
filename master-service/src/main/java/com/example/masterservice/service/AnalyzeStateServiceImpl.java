@@ -3,6 +3,7 @@ package com.example.masterservice.service;
 import com.example.masterservice.dto.AnalyzeStateDTO;
 import com.example.masterservice.dto.mapper.AnalyzeStateMapper;
 import com.example.masterservice.entity.AnalyzeState;
+import com.example.masterservice.exception.ResourceNotFoundException;
 import com.example.masterservice.repository.AnalyzeStateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,14 @@ public class AnalyzeStateServiceImpl implements AnalyzeStateService {
     public AnalyzeStateDTO get(UUID jobId) {
         return AnalyzeStateMapper.mapToDTO(analyzeStateRepository
                 .findById(jobId)
-                .orElseThrow(()->{throw new RuntimeException("Not found"); }));
+                .orElseThrow(()->{
+                    throw new ResourceNotFoundException("AnalyzeState with jobId " + jobId + " not found");
+                }));
     }
 
     @Override
-    public AnalyzeState save(AnalyzeState state) {
-        return analyzeStateRepository.save(state);
+    public AnalyzeState save(AnalyzeState analyzeState) {
+        return analyzeStateRepository.save(analyzeState);
 
     }
 

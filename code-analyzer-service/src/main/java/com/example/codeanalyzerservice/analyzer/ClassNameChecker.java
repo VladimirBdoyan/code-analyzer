@@ -4,17 +4,13 @@ import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 
-@RequiredArgsConstructor
-public class ClassNameChecker implements Checker {
+@UtilityClass
+public final class ClassNameChecker {
 
-    private final ClassOrInterfaceDeclaration n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(ClassOrInterfaceDeclaration n, AnalyzeResult arg) {
         int coefficient = CodeSmellCategory.HIGH.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);

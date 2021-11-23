@@ -18,19 +18,27 @@ public class AnalyzeReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "username")
     private String username;
 
-    @Column(name = "date")
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_date")
+    private Date startDate;
 
-    @Column(name = "since")
-    private Date since;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_date")
+    private Date endDate;
 
-    @Column(name = "till")
-    private Date till;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     @OneToOne(mappedBy = "analyzeReport", cascade = CascadeType.ALL)
     private AnalyzeResult analyzeResult;

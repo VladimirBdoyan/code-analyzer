@@ -4,16 +4,12 @@ import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
-@RequiredArgsConstructor
-public class DefaultPackageUsedChecker implements Checker {
+@UtilityClass
+public final class DefaultPackageUsedChecker {
 
-    private final CompilationUnit n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(CompilationUnit n, AnalyzeResult arg) {
         int coefficient= CodeSmellCategory.LOW.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate()+coefficient);
         arg.setMaxRate(arg.getMaxRate()+coefficient);

@@ -6,17 +6,13 @@ import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 
-@RequiredArgsConstructor
-public class OneLineVariablesDeclarationChecker implements Checker {
+@UtilityClass
+public final class OneLineVariablesDeclarationChecker {
 
-    private final CompilationUnit n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(CompilationUnit n, AnalyzeResult arg) {
         int coefficient = CodeSmellCategory.LOW.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);

@@ -1,24 +1,20 @@
 package com.example.codeanalyzerservice.analyzer;
 
-import com.example.codeanalyzerservice.constants.JavaKeyWords;
+import com.example.codeanalyzerservice.constant.JavaKeyWords;
 import com.example.codeanalyzerservice.entity.AnalyzeResult;
 import com.example.codeanalyzerservice.entity.CodeSmell;
 import com.example.codeanalyzerservice.entity.enums.CodeSmellCategory;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.resolution.types.ResolvedType;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-public class CollectionInterfaceUsedChecker implements Checker {
+@UtilityClass
+public final class CollectionInterfaceUsedChecker {
 
-    private final CompilationUnit n;
-    private final AnalyzeResult arg;
-
-    @Override
-    public void check() {
+    public static void check(CompilationUnit n, AnalyzeResult arg) {
         int coefficient= CodeSmellCategory.LOW.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate()+coefficient);
         arg.setMaxRate(arg.getMaxRate()+coefficient);

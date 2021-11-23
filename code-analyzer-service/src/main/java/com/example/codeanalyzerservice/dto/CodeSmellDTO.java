@@ -8,5 +8,4 @@ public class CodeSmellDTO {
     private Long id;
     private CodeSmellCategory category;
     private String message;
-    private String fileName;
 }

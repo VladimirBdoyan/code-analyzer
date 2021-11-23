@@ -8,19 +8,14 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-public class UtilityClassChecker implements Checker {
+@UtilityClass
+public final class UtilityClassChecker {
 
-    private final ClassOrInterfaceDeclaration n;
-    private final AnalyzeResult arg;
-
-
-    @Override
-    public void check() {
+    public static void check(ClassOrInterfaceDeclaration n, AnalyzeResult arg) {
         if (n.isInterface()) {
             return;
         }
@@ -32,7 +27,7 @@ public class UtilityClassChecker implements Checker {
             }
         }
 
-        int coefficient = CodeSmellCategory.HIGH.getCoefficient();
+        int coefficient = CodeSmellCategory.MEDIUM.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate() + 2 * coefficient);
         arg.setMaxRate(arg.getMaxRate() + 2 * coefficient);
 

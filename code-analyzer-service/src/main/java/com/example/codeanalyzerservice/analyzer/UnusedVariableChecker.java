@@ -9,21 +9,17 @@ import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
-import lombok.RequiredArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-@RequiredArgsConstructor
-public class UnusedVariableChecker implements Checker {
 
-    private final MethodDeclaration n;
-    private final AnalyzeResult arg;
+@UtilityClass
+public final class UnusedVariableChecker {
 
-
-    @Override
-    public void check() {
+    public static void check(MethodDeclaration n, AnalyzeResult arg) {
         int coefficient = CodeSmellCategory.MEDIUM.getCoefficient();
         arg.setCurrentRate(arg.getCurrentRate() + coefficient);
         arg.setMaxRate(arg.getMaxRate() + coefficient);
@@ -43,8 +39,8 @@ public class UnusedVariableChecker implements Checker {
             }
 
             for (Node node: statement.getChildNodes()) {
-                Set<String> usages = node.findAll(SimpleName.class, (n) ->
-                        variableNames.contains(n.asString()) && !newVars.contains(n.asString())
+                Set<String> usages = node.findAll(SimpleName.class, (nd) ->
+                        variableNames.contains(nd.asString()) && !newVars.contains(nd.asString())
                 ).stream().map(SimpleName::asString).collect(Collectors.toSet());
 
                 variableNames.removeAll(usages);

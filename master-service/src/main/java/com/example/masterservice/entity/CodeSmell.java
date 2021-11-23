@@ -11,11 +11,12 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "code_smell")
+@Table(name = "code_smell", schema = "master")
 public class CodeSmell {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
 
     @Column(name = "message")

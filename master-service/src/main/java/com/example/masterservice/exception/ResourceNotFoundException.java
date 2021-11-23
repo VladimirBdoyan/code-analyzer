@@ -1,6 +1,6 @@
 package com.example.masterservice.exception;
 
-public class ResourceNotFoundException extends AppRuntimeException {
+public class ResourceNotFoundException extends MasterRuntimeException {
 
     public ResourceNotFoundException(String message) {
         super(message);

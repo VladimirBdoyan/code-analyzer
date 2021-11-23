@@ -16,5 +16,4 @@ public class AnalyzeStateDTO {
     private Date finishDate;
     private String failReason;
     private AnalyzeReportDTO analyzeReport;
-
 }

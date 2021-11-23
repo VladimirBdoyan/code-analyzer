@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class PullRequestReportDTO {
-    private int conversationCount;
-    private int pullRequestCommitCommentCount;
-    private double pullRequestDensity;
-    private double pullRequestCommitDensity;
+    private Integer conversationCount;
+    private Integer pullRequestCommitCommentCount;
+    private Double pullRequestDensity;
+    private Double pullRequestCommitDensity;
 }

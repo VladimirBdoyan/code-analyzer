@@ -1,17 +1,18 @@
 package com.example.codeanalyzerservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.util.Date;
-import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AnalyzeReportDTO {
     private Long id;
     private String username;
-    private Date date;
-    private Date since;
-    private Date till;
-    private AnalyzeResultDTO analyzeResults;
+    private AnalyzeResultDTO analyzeResult;
+    private Date startDate;
+    private Date endDate;
+    private Date createdAt;
+    private Date updatedAt;
 }
